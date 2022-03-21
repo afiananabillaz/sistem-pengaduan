@@ -4,8 +4,8 @@
             @include('layouts.headerPenyedia')
             <div class="content-wrapper container">
                 <section class="section">
-                    <div class="card">
-                        <div class="card-header">
+                    <div class="card" >
+                        <div class="card-header" >
                             <h4 class="card-title">Sampaikan laporan Anda langsung kepada <br> Biro Pengadaan Barang dan Jasa Sekretariat Provinsi Riau</h4>
                         </div>
 

@@ -76,7 +76,7 @@
                                                     <span class="badge bg-success">Diterima</span>
                                                 </td>
                                                 <td>
-                                                    <span class="badge bg-info" data-bs-toggle="modal" data-bs-target="#inlineForm1">Tanggapi</span>
+                                                    <span class="badge bg-info" data-bs-toggle="modal" data-bs-target="#inlineForm1" style="cursor:pointer">Tanggapi</span>
 
                                                     <!--login form Modal -->
                                                     <div class="modal fade text-left" id="inlineForm1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
@@ -132,7 +132,7 @@
                                                     <span class="badge bg-danger">Ditolak</span>
                                                 </td>
                                                 <td>
-                                                    <span class="badge bg-info" data-bs-toggle="modal" data-bs-target="#inlineForm1">Tanggapi</span>
+                                                    <span class="badge bg-info" data-bs-toggle="modal" data-bs-target="#inlineForm1" style="cursor:pointer">Tanggapi</span>
 
                                                     <!--login form Modal -->
                                                     <div class="modal fade text-left" id="inlineForm1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">

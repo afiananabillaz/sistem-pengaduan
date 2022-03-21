@@ -78,7 +78,7 @@
                                                     <span class="badge bg-warning">Sedang Diproses</span>
                                                 </td>
                                                 <td>
-                                                    <span class="badge bg-info" data-bs-toggle="modal" data-bs-target="#inlineForm1">Disposisi</span>
+                                                    <span class="badge bg-info" data-bs-toggle="modal" data-bs-target="#inlineForm1" style="cursor:pointer">Disposisi</span>
 
                                                     <!--login form Modal -->
                                                     <div class="modal fade text-left" id="inlineForm1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
@@ -105,8 +105,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <span><i class="fa fa-edit"></i></span>
-                                                    <span><i class="fa fa-trash-alt"></i></span>
+                                                    <span><i class="fa fa-edit" style="color: #ffe600;"></i></span>
+                                                    <span><i class="fa fa-trash-alt" style="color: red;"></i></span>
                                                 </td>
                                             </tr>
 
@@ -120,7 +120,7 @@
                                                     <span class="badge bg-success">Diterima</span>
                                                 </td>
                                                 <td>
-                                                    <span class="badge bg-info" data-bs-toggle="modal" data-bs-target="#inlineForm1">Disposisi</span>
+                                                    <span class="badge bg-info" data-bs-toggle="modal" data-bs-target="#inlineForm1" style="cursor:pointer">Disposisi</span>
 
                                                     <!--login form Modal -->
                                                     <div class="modal fade text-left" id="inlineForm1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
@@ -147,13 +147,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <span><i class="fa fa-edit"></i></span>
-                                                    <span><i class="fa fa-trash-alt"></i></span>
+                                                    <span><i class="fa fa-edit" style="color: #ffe600;"></i></span>
+                                                    <span><i class="fa fa-trash-alt" style="color: red;"></i></span>
                                                 </td>
                                             </tr>
 
                                             <tr>
-                                                <td>2</td>
+                                                <td>3</td>
                                                 <td>02/03/2022</td>
                                                 <td>12345</td>
                                                 <td>Akun tidak bisa dibuka</td>
@@ -162,7 +162,7 @@
                                                     <span class="badge bg-danger">Ditolak</span>
                                                 </td>
                                                 <td>
-                                                    <span class="badge bg-info" data-bs-toggle="modal" data-bs-target="#inlineForm1">Disposisi</span>
+                                                    <span class="badge bg-info" data-bs-toggle="modal" data-bs-target="#inlineForm1" style="cursor:pointer">Disposisi</span>
 
                                                     <!--login form Modal -->
                                                     <div class="modal fade text-left" id="inlineForm1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
@@ -189,8 +189,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <span><i class="fa fa-edit"></i></span>
-                                                    <span><i class="fa fa-trash-alt"></i></span>
+                                                    <span><i class="fa fa-edit" style="color: #ffe600;"></i></span>
+                                                    <span><i class="fa fa-trash-alt" style="color: red;"></i></span>
                                                 </td>
                                             </tr>
 

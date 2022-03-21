@@ -50,6 +50,10 @@ Route::get('/akumulasiHelpdesk', function () {
     return view('helpdesk.akumulasiHelpdesk');
 });
 
+Route::get('/kelolaPengguna', function () {
+    return view('helpdesk.kelolaPengguna');
+});
+
 Route::get('/dashboardPegawai', function () {
     return view('pegawai.dashboardPegawai');
 });

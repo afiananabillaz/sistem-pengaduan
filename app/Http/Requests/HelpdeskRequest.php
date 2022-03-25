@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rules;
 use Illuminate\Foundation\Http\FormRequest;
 
 class HelpdeskRequest extends FormRequest
@@ -24,7 +25,8 @@ class HelpdeskRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama' => 'required|max:255|string'
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', Rules\Password::defaults()],
         ];
     }
 }

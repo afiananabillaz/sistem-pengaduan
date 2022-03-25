@@ -21,115 +21,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($pengaduans as $pengaduan)
                                         <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
+                                            <td>{{ $pengaduan->email }}</td>
+                                            <td>{{ $pengaduan->judul }}</td>
+                                            <td>{{ $pengaduan->keterangan }}</td>
+                                            <td><a href="">{{ $pengaduan->bukti }}</a></td>
                                         </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium, eveniet.</td>
-                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque facilis ut nam id voluptatem cum culpa optio debitis, praesentium, corporis perferendis inventore facere consequatur quibusdam a quae impedit eius veritatis. Ex commodi eveniet quis ipsum, voluptates minima earum nostrum tempore.</td>
-                                            <td><a href="">document.pdf</a></td>
-                                        </tr>
-
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -144,5 +43,5 @@
 
 
         </div>
-        
+
 </x-penyedia-layout>

@@ -1,39 +1,34 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+<x-login-layout>
+    <div id="auth">
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-        </div>
+        <div class="row h-100">
+            <div class="col-lg-6" style="margin-top: 100px;">
+                <div id="auth-left">
 
-        @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-            </div>
-        @endif
+                    <p>Terima kasih telah mendaftar! Sebelum memulai, silahkan verifikasi email Anda dengan mengklik tautan yang baru saja kami kirimkan melalui email kepada Anda. Jika Anda tidak menerima email tersebut, kami akan dengan senang hati mengirimkan email lain kepada Anda.</p>
 
-        <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
-                @csrf
+                    @if (session('status') == 'verification-link-sent')
+                    <div class="mb-4 font-medium text-sm text-green-600">
+                        {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+                    </div>
+                    @endif
 
-                <div>
-                    <x-button>
-                        {{ __('Resend Verification Email') }}
-                    </x-button>
+                    <form action="{{ route('verification.send') }}" method="post">
+                        @csrf
+                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-2">Kirim Ulang Email Verifikasi</button>
+                    </form>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-2">Logout</button>
+                    </form>
                 </div>
-            </form>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Log Out') }}
-                </button>
-            </form>
+            </div>
+            <div class="col-lg-6">
+                <div>
+                    <img src="{{ asset('img/illustration/5.png') }}" alt="Thumb" style="width: 80%; margin-top: 65px;">
+                </div>
+            </div>
         </div>
-    </x-auth-card>
-</x-guest-layout>
+
+    </div>
+</x-login-layout>

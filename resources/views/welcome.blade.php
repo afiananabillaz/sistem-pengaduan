@@ -65,7 +65,7 @@
                                     <p class="wow fadeInLeft" data-wow-duration="1.5s">
                                         Aplikasi Layanan Pengaduan untuk melaporkan segala kendala terkait Pengadaan Barang dan Jasa Sekretariat Daerah Provinsi Riau
                                     </p>
-                                    <a class="btn circle btn-md btn-gradient wow fadeInUp" data-wow-duration="1.8s" href="/login">MULAI <i class="bi-chevron-right fs-6"></i></a>
+                                    <a class="btn circle btn-md btn-gradient wow fadeInUp" data-wow-duration="1.8s" href="{{ route('login') }}">MULAI <i class="bi-chevron-right fs-6"></i></a>
                                 </div>
                                 <div class="col-lg-6 thumb wow fadeInRight" data-wow-duration="1s">
                                     <img src="{{ asset('img/illustration/1.png') }}" alt="Thumb">

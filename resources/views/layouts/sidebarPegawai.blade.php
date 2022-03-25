@@ -13,14 +13,14 @@
                     <ul class="menu">
 
                         <li class="sidebar-item  ">
-                            <a href="/dashboardPegawai" class='sidebar-link'>
+                            <a href="{{ route('pegawai.index') }}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Beranda</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="/pengaduanPegawai" class='sidebar-link'>
+                            <a href="{{ route('pegawai.show') }}" class='sidebar-link'>
                                 <i class="bi bi-person-plus-fill"></i>
                                 <span>Pengaduan</span>
                             </a>
@@ -32,16 +32,16 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="/tambahLayananPegawai">Tambah Layanan</a>
+                                    <a href="{{ route('pegawai.layanan') }}">Tambah Layanan</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="/riwayatLayananPegawai">Riwayat</a>
+                                    <a href="{{ route('pegawai.riwayat') }}">Riwayat</a>
                                 </li>
                             </ul>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="/trackingPegawai" class='sidebar-link'>
+                            <a href="{{ route('pegawai.tracking') }}" class='sidebar-link'>
                                 <i class="bi bi-eye-fill"></i>
                                 <span>Tracking</span>
                             </a>

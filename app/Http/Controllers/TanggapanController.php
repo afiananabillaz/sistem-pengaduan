@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TanggapanRequest;
 use App\Models\Tanggapan;
 use Illuminate\Http\Request;
 
@@ -30,10 +31,10 @@ class TanggapanController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\TanggapanRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TanggapanRequest $request)
     {
         //
     }
@@ -63,11 +64,11 @@ class TanggapanController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\TanggapanRequest  $request
      * @param  \App\Models\Tanggapan  $tanggapan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tanggapan $tanggapan)
+    public function update(TanggapanRequest $request, Tanggapan $tanggapan)
     {
         //
     }

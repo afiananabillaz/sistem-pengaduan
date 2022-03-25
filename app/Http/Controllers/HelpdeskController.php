@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Helpdesk;
-use Illuminate\Http\Request;
+use App\Models\Penyedia;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\HelpdeskRequest;
+use App\Models\Pegawai;
+use Illuminate\Support\Facades\Hash;
 
 class HelpdeskController extends Controller
 {
@@ -14,60 +19,72 @@ class HelpdeskController extends Controller
      */
     public function index()
     {
-        //
+        return view('helpdesk.dashboardHelpdesk', [
+            'helpdesks' => Helpdesk::all(),
+            'penyedias' => Penyedia::all(),
+            'pegawais' => Pegawai::all(),
+            'users' => User::all(),
+            'penggunas' => User::all()
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\HelpdeskRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(HelpdeskRequest $request)
     {
-        //
-    }
+        if ($request->role == 'helpdesk') {
+            User::create([
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+            ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Helpdesk  $helpdesk
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Helpdesk $helpdesk)
-    {
-        //
-    }
+            Helpdesk::create([
+                'user_id' => User::where('email', $request->email)->first()->id,
+                'nama' => $request->nama,
+            ]);
+        } elseif ($request->role == 'pegawai') {
+            User::create([
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+            ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Helpdesk  $helpdesk
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Helpdesk $helpdesk)
-    {
-        //
+            Pegawai::create([
+                'user_id' => User::where('email', $request->email)->first()->id,
+                'nama' => $request->nama,
+                'nip' => $request->nip,
+            ]);
+        } else {
+            User::create([
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+            ]);
+
+            Penyedia::create([
+                'user_id' => User::where('email', $request->email)->first()->id,
+                'nama' => $request->nama,
+                'npwp' => $request->npwp,
+                'no_hp' => $request->no_hp,
+            ]);
+        }
+        return redirect()->route('helpdesk.index');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\HelpdeskRequest $request
      * @param  \App\Models\Helpdesk  $helpdesk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Helpdesk $helpdesk)
+    public function update(HelpdeskRequest $request, Helpdesk $helpdesk)
     {
         //
     }
@@ -80,6 +97,37 @@ class HelpdeskController extends Controller
      */
     public function destroy(Helpdesk $helpdesk)
     {
-        //
+        Helpdesk::destroy($helpdesk->id);
+
+        return redirect()->route('helpdesk.index');
+
+    }
+
+    public function show(Helpdesk $helpdesk)
+    {
+        return view('helpdesk.laporanHelpdesk', [
+            'helpdesks' => Helpdesk::all(),
+            'penyedias' => Penyedia::all(),
+            'pegawais' => Pegawai::all()
+        ]);
+    }
+
+    public function akumulasi(Helpdesk $helpdesk)
+    {
+        return view('helpdesk.akumulasiHelpdesk', [
+            'helpdesks' => Helpdesk::all(),
+            'penyedias' => Penyedia::all(),
+            'pegawais' => Pegawai::all()
+        ]);
+    }
+
+    public function pengguna(Helpdesk $helpdesk)
+    {
+        return view('helpdesk.kelolaPengguna', [
+            'helpdesks' => Helpdesk::all(),
+            'penyedias' => Penyedia::all(),
+            'pegawais' => Pegawai::all(),
+            'users' => User::all()
+        ]);
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('helpdesks', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('nama');
             $table->timestamps();
         });

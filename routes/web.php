@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\HelpdeskController;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PengaduanController;
+use App\Http\Controllers\PenyediaController;
+use App\Http\Controllers\RiwayatPengaduanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,66 +23,72 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/loginBaru', function () {
-    return view('loginBaru');
-});
+Route::get('/dashboardPenyedia', [PenyediaController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('penyedia.index');
 
-Route::get('/dashboardPenyedia', function () {
-    return view('penyedia.dashboardPenyedia');
-});
+Route::get('/riwayatPengaduanPenyedia', [RiwayatPengaduanController::class, 'index'])
+    ->name('riwayat.index');
 
-Route::get('/riwayatPengaduanPenyedia', function () {
-    return view('penyedia.riwayatPengaduanPenyedia');
-});
+Route::post('/riwayatPengaduanPenyedia', [RiwayatPengaduanController::class, 'store'])
+    ->name('riwayat.store');
 
-Route::get('/trackingPenyedia', function () {
-    return view('penyedia.trackingPenyedia');
-});
+Route::get('/trackingPenyedia', [PenyediaController::class, 'tracking'])
+    ->name('penyedia.tracking');
 
-Route::get('/dashboardHelpdesk', function () {
-    return view('helpdesk.dashboardHelpdesk');
-});
-
-Route::get('/pengaduanHelpdesk', function () {
-    return view('helpdesk.pengaduanHelpdesk');
-});
-
-Route::get('/laporanHelpdesk', function () {
-    return view('helpdesk.laporanHelpdesk');
-});
-
-Route::get('/akumulasiHelpdesk', function () {
-    return view('helpdesk.akumulasiHelpdesk');
-});
-
-Route::get('/kelolaPengguna', function () {
-    return view('helpdesk.kelolaPengguna');
-});
-
-Route::get('/dashboardPegawai', function () {
-    return view('pegawai.dashboardPegawai');
-});
-
-Route::get('/pengaduanPegawai', function () {
-    return view('pegawai.pengaduanPegawai');
-});
+Route::post('/trackingPenyedia', [PenyediaController::class, 'store'])
+    ->name('penyedia.tracking.store');
 
 
-Route::get('/tambahLayananPegawai', function () {
-    return view('pegawai.tambahLayananPegawai');
-});
+Route::get('/dashboardHelpdesk', [HelpdeskController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('helpdesk.index');
+
+Route::get('/pengaduanHelpdesk', [PengaduanController::class, 'index'])
+    ->name('pengaduan.index');
+
+Route::post('/pengaduanHelpdesk', [PengaduanController::class, 'store'])
+    ->name('pengaduan.store');
+
+Route::get('/laporanHelpdesk', [HelpdeskController::class, 'show'])
+    ->name('helpdesk.show');
+
+Route::post('/laporanHelpdesk', [PengaduanController::class, 'store'])
+    ->name('laporan.store');
+
+Route::get('/akumulasiHelpdesk', [HelpdeskController::class, 'akumulasi'])
+    ->name('helpdesk.akumulasi');
+
+Route::post('/akumulasiHelpdesk', [PengaduanController::class, 'store'])
+    ->name('helpdesk.akumulasi.store');
+
+Route::get('/kelolaPengguna', [HelpdeskController::class, 'pengguna'])
+    ->name('helpdesk.pengguna');
+
+Route::post('/kelolaPengguna', [HelpdeskController::class, 'store'])
+    ->name('helpdesk.store');
 
 
-Route::get('/riwayatLayananPegawai', function () {
-    return view('pegawai.riwayatLayananPegawai');
-});
+Route::get('/dashboardPegawai', [PegawaiController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('pegawai.index');
 
-Route::get('/trackingPegawai', function () {
-    return view('pegawai.trackingPegawai');
-});
+Route::get('/pengaduanPegawai', [PegawaiController::class, 'show'])
+    ->name('pegawai.show');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::post('/pengaduanPegawai', [PegawaiController::class, 'store'])
+    ->name('pegawai.store');
 
-require __DIR__.'/auth.php';
+Route::get('/tambahLayananPegawai', [PegawaiController::class, 'layanan'])
+    ->name('pegawai.layanan');
+
+Route::get('/riwayatLayananPegawai', [PegawaiController::class, 'riwayat'])
+    ->name('pegawai.riwayat');
+
+Route::post('/riwayatLayananPegawai', [PegawaiController::class, 'store'])
+    ->name('pegawai.store');
+
+Route::get('/trackingPegawai', [PegawaiController::class, 'tracking'])
+    ->name('pegawai.tracking');
+
+require __DIR__ . '/auth.php';

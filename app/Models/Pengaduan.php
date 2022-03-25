@@ -10,4 +10,9 @@ class Pengaduan extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function penyedia()
+    {
+        return $this->hasMany(Penyedia::class);
+    }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PengaduanRequest;
+use App\Models\Tiket;
+use App\Models\Penyedia;
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 
@@ -14,7 +17,11 @@ class PengaduanController extends Controller
      */
     public function index()
     {
-        //
+        return view('helpdesk.pengaduanHelpdesk', [
+            'pengaduans' => Pengaduan::all(),
+            'tikets' => Tiket::where('kode')->get(),
+            'penyedias' => Penyedia::where('nama')->get()
+        ]);
     }
 
     /**
@@ -24,18 +31,28 @@ class PengaduanController extends Controller
      */
     public function create()
     {
-        //
+        return view('helpdesk.pengaduanHelpdesk');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PengaduanRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PengaduanRequest $request)
     {
-        //
+        Pengaduan::create([
+            'tiket_id' => $request->tiket_id,
+            'penyedia_id' => $request->penyedia_id,
+            'tanggal' => $request->tanggal,
+            'judul' => $request->judul,
+            'keterangan' => $request->keterangan,
+            'bukti' => $request->bukti,
+            'nama' => $request->nama,
+        ]);
+
+        return redirect()->route('pengaduan.index');
     }
 
     /**
@@ -46,7 +63,7 @@ class PengaduanController extends Controller
      */
     public function show(Pengaduan $pengaduan)
     {
-        //
+        // 
     }
 
     /**
@@ -63,13 +80,12 @@ class PengaduanController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PengaduanRequest  $request
      * @param  \App\Models\Pengaduan  $pengaduan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pengaduan $pengaduan)
+    public function update(PengaduanRequest $request, Pengaduan $pengaduan)
     {
-        //
     }
 
     /**
@@ -80,6 +96,8 @@ class PengaduanController extends Controller
      */
     public function destroy(Pengaduan $pengaduan)
     {
-        //
+        Pengaduan::destroy($pengaduan->id);
+
+        return redirect('/pengaduanHelpdesk')->with('success', 'Pengaduan Berhasil Dihapus');
     }
 }

@@ -4,34 +4,43 @@
             @include('layouts.headerPenyedia')
             <div class="content-wrapper container">
                 <section class="section">
-                    <div class="card" >
-                        <div class="card-header" >
+                    <div class="card">
+                        <div class="card-header">
                             <h4 class="card-title">Sampaikan laporan Anda langsung kepada <br> Biro Pengadaan Barang dan Jasa Sekretariat Provinsi Riau</h4>
                         </div>
 
                         <div class="card-body">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="basicInput">Judul</label>
-                                    <input type="text" class="form-control" id="basicInput">
-                                </div>
+                            <form action="/riwayatPengaduanPenyedia" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="hidden" name="tanggal" value="{{ date('Y-m-d') }}">
 
-                                <div class="form-group">
-                                    <label for="helpInputTop">Keterangan</label>
-                                    <textarea type="text" class="form-control" id="helpInputTop"></textarea>
-                                </div>
+                                        <label for=" judul">Judul</label>
+                                        <input type="text" class="form-control" id="judul" name="judul">
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="helperText">Bukti</label>
-                                    <input type="file" id="helperText" class="form-control" placeholder="Name">
-                                </div>
+                                    <div class="form-group">
+                                        <label for="keterangan">Keterangan</label>
+                                        <textarea type="text" class="form-control" id="keterangan" name="keterangan"></textarea>
+                                    </div>
 
-                                <button type="submit" class="btn btn-primary d-flex block justify-content-end" data-bs-toggle="modal" data-bs-target="#default">
-                                    Kirim
-                                </button>
+                                    <label for="penyedia_id">Penyedia/Instansi</label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="penyedia_id" name="penyedia_id">
+                                    </div>
 
-                                <!--Basic Modal -->
-                                <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                    <div class="form-group">
+                                        <label for="bukti">Bukti</label>
+                                        <input type="file" id="bukti" name="bukti" class="form-control" placeholder="Name">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary d-flex block justify-content-end" data-bs-toggle="modal" data-bs-target="#default">
+                                        Kirim
+                                    </button>
+
+                                    <!--Basic Modal -->
+                                    <!-- <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -50,17 +59,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-
+                                </div> -->
+                            </form>
                         </div>
 
                     </div>
-            </div>
-            </section>
 
-            @include('layouts.footer')
+            </div>
         </div>
+        </section>
+
+        @include('layouts.footer')
+    </div>
     </div>
 
 </x-penyedia-layout>

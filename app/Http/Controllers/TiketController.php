@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TiketRequest;
 use App\Models\Tiket;
 use Illuminate\Http\Request;
 
@@ -30,10 +31,10 @@ class TiketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\TiketRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TiketRequest $request)
     {
         //
     }
@@ -63,11 +64,11 @@ class TiketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\TiketRequest  $request
      * @param  \App\Models\Tiket  $tiket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tiket $tiket)
+    public function update(TiketRequest $request, Tiket $tiket)
     {
         //
     }

@@ -17,13 +17,13 @@
                     <form action="{{ route('login') }}" method="post">
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="email" class="form-control form-control-xl" placeholder="Email" required autofocus>
+                            <input type="email" name="email" class="form-control form-control-xl" placeholder="Email" required autofocus>
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" placeholder="Password" required autocomplete="current-password">
+                            <input type="password" name="password" class="form-control form-control-xl" placeholder="Password" required autocomplete="current-password">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PegawaiRequest;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        //
+        return view('pegawai.dashboardPegawai', [
+            'pegawais' => Pegawai::all(),
+        ]);
     }
 
     /**
@@ -30,10 +33,10 @@ class PegawaiController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PegawaiRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PegawaiRequest $request)
     {
         //
     }
@@ -46,7 +49,9 @@ class PegawaiController extends Controller
      */
     public function show(Pegawai $pegawai)
     {
-        //
+        return view('pegawai.pengaduanPegawai', [
+            'pegawais' => Pegawai::all(),
+        ]);
     }
 
     /**
@@ -63,11 +68,11 @@ class PegawaiController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\PegawaiRequest  $request
      * @param  \App\Models\Pegawai  $pegawai
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pegawai $pegawai)
+    public function update(PegawaiRequest $request, Pegawai $pegawai)
     {
         //
     }
@@ -81,5 +86,26 @@ class PegawaiController extends Controller
     public function destroy(Pegawai $pegawai)
     {
         //
+    }
+
+    public function layanan()
+    {
+        return view('pegawai.tambahLayananPegawai', [
+            'pegawais' => Pegawai::all(),
+        ]);
+    }
+
+    public function riwayat()
+    {
+        return view('pegawai.riwayatLayananPegawai', [
+            'pegawais' => Pegawai::all(),
+        ]);
+    }
+
+    public function tracking()
+    {
+        return view('pegawai.trackingPegawai', [
+            'pegawais' => Pegawai::all(),
+        ]);
     }
 }

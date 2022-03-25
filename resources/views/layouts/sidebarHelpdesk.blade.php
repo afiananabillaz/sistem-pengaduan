@@ -13,35 +13,35 @@
         <ul class="menu">
 
             <li class="sidebar-item  ">
-                <a href="/dashboardHelpdesk" class='sidebar-link'>
+                <a href="{{ route('helpdesk.index') }}" class='sidebar-link'>
                     <i class="bi bi-grid-fill"></i>
                     <span>Beranda</span>
                 </a>
             </li>
 
             <li class="sidebar-item  ">
-                <a href="/pengaduanHelpdesk" class='sidebar-link'>
+                <a href="{{ route('pengaduan.index') }}" class='sidebar-link'>
                     <i class="bi bi-person-plus-fill"></i>
                     <span>Pengaduan</span>
                 </a>
             </li>
 
             <li class="sidebar-item  ">
-                <a href="/laporanHelpdesk" class='sidebar-link'>
+                <a href="{{ route('helpdesk.show') }}" class='sidebar-link'>
                     <i class="bi bi-book-fill"></i>
                     <span>Laporan</span>
                 </a>
             </li>
 
             <li class="sidebar-item  ">
-                <a href="/akumulasiHelpdesk" class='sidebar-link'>
+                <a href="{{ route('helpdesk.akumulasi') }}" class='sidebar-link'>
                     <i class="bi bi-bar-chart-fill"></i>
                     <span>Akumulasi</span>
                 </a>
             </li>
 
             <li class="sidebar-item  ">
-                <a href="/kelolaPengguna" class='sidebar-link'>
+                <a href="{{ route('helpdesk.pengguna') }}" class='sidebar-link'>
                     <i class="bi bi-person-fill"></i>
                     <span>Kelola Pengguna</span>
                 </a>

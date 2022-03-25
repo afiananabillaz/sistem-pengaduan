@@ -16,7 +16,7 @@
                     <form action="{{ route('password.email') }}" method="post">
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="email" class="form-control form-control-xl" placeholder="Email" required autofocus>
+                            <input type="email" name="email" class="form-control form-control-xl" placeholder="Email" required autofocus>
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
@@ -25,7 +25,7 @@
                         <button class="btn btn-primary btn-block btn-lg shadow-lg mt-2">Reset Password</button>
                     </form>
                     <div class="text-center mt-5 text-lg">
-                        <p class="text-gray-600"><a href="{{ route('login') }}" class="font-bold">Kembali Login</a></p>
+                        <p class="text-gray-600"><a href="{{ route('login') }}" class="font-bold">Masuk Kembali</a></p>
                     </div>
                 </div>
             </div>

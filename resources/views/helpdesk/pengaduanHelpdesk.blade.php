@@ -16,6 +16,13 @@
                                         Tambah Pengaduan <i class="fa fa-plus"></i>
                                     </button>
 
+                                    @if (session()->has('success'))
+                                    <div class="alert alert-success alert-dismissible show fade">
+                                        {{ session('success') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    @endif
+
                                     <!--login form Modal -->
                                     <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -26,29 +33,35 @@
                                                         <i data-feather="x"></i>
                                                     </button>
                                                 </div>
-                                                <form action="#">
+
+                                                <form action="{{ route('pengaduan.index') }}" method="post" enctype="multipart/form-data">
+                                                    @csrf
                                                     <div class="modal-body">
-                                                        <label>Judul </label>
+                                                        <input type="hidden" name="tanggal" value="{{ date('Y-m-d') }}">
+                                                        <label for="judul">Judul</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" class="form-control" id="judul" name="judul">
                                                         </div>
-                                                        <label>Keterangan</label>
+                                                        <label for="penyedia_id">Penyedia/Instansi</label>
                                                         <div class="form-group">
-                                                            <textarea type="text" class="form-control"></textarea>
+                                                            <input type="text" class="form-control" id="penyedia_id" name="penyedia_id">
+                                                        </div>
+                                                        <label for="keterangan">Keterangan</label>
+                                                        <div class="form-group">
+                                                            <textarea type="text" class="form-control" id="keterangan" name="keterangan"></textarea>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="helperText">Bukti</label>
-                                                            <input type="file" id="helperText" class="form-control" placeholder="Name">
+                                                            <label for="bukti">Bukti</label>
+                                                            <input type="file" id="bukti" name="bukti" class="form-control" placeholder="Name">
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                        <button type="submit" class="btn btn-light-secondary" data-bs-dismiss="modal">
                                                             <i class="bx bx-x d-block d-sm-none"></i>
                                                             <span class="d-none d-sm-block">Batal</span>
                                                         </button>
-                                                        <button type="button" class="btn btn-primary ml-1" data-bs-dismiss="modal">
-                                                            <i class="bx bx-check d-block d-sm-none"></i>
-                                                            <span class="d-none d-sm-block">Simpan</span>
+                                                        <button type="submit" class="btn btn-primary ml-1">
+                                                            Simpan
                                                         </button>
                                                     </div>
                                                 </form>
@@ -68,12 +81,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($pengaduans as $pengaduan )
                                             <tr>
-                                                <td>1</td>
-                                                <td>02/03/2022</td>
-                                                <td>12345</td>
-                                                <td>Akun tidak bisa dibuka</td>
-                                                <td>RS Awal Bros Pekanbaru</td>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $pengaduan->tanggal }}</td>
+                                                <td>{{ $pengaduan->kode }}</td>
+                                                <td>{{ $pengaduan->judul }}</td>
+                                                <td>{{ $pengaduan->penyedia_id }}</td>
                                                 <td>
                                                     <span class="badge bg-warning">Sedang Diproses</span>
                                                 </td>
@@ -105,95 +119,62 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <span><i class="fa fa-edit" style="color: #ffe600;"></i></span>
-                                                    <span><i class="fa fa-trash-alt" style="color: red;"></i></span>
-                                                </td>
-                                            </tr>
+                                                    <button data-bs-toggle="modal" data-bs-target="#inlineForm2" class="badge bg-success border-0"><i class="fa fa-edit"></i></button>
 
-                                            <tr>
-                                                <td>2</td>
-                                                <td>02/03/2022</td>
-                                                <td>12345</td>
-                                                <td>Akun tidak bisa dibuka</td>
-                                                <td>RS Awal Bros Pekanbaru</td>
-                                                <td>
-                                                    <span class="badge bg-success">Diterima</span>
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-info" data-bs-toggle="modal" data-bs-target="#inlineForm1" style="cursor:pointer">Disposisi</span>
-
-                                                    <!--login form Modal -->
-                                                    <div class="modal fade text-left" id="inlineForm1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                    <div class="modal fade text-left" id="inlineForm2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title" id="myModalLabel33">Disposisi</h4>
+                                                                    <h4 class="modal-title" id="myModalLabel33">Edit Pengaduan</h4>
                                                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                                         <i data-feather="x"></i>
                                                                     </button>
                                                                 </div>
-                                                                <form action="#">
+                                                                <form action="{{ route('pengaduan.index') }}" method="post" enctype="multipart/form-data">
+                                                                    @csrf
                                                                     <div class="modal-body">
-                                                                        <p>Disposisi Kepada</p>
-                                                                        <fieldset class="form-group">
-                                                                            <select class="form-select" id="basicSelect">
-                                                                                <option>Nadia Asri</option>
-                                                                                <option>Alit</option>
-                                                                            </select>
-                                                                        </fieldset>
+                                                                        <input type="hidden" name="tanggal" value="{{ date('Y-m-d') }}">
+                                                                        <label for="judul">Judul</label>
+                                                                        <div class="form-group">
+                                                                            <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul', $pengaduan->judul) }}">
+                                                                        </div>
+                                                                        <label for="penyedia_id">Penyedia/Instansi</label>
+                                                                        <div class="form-group">
+                                                                            <input type="text" class="form-control" id="penyedia_id" name="penyedia_id" value="{{ old('penyedia_id', $pengaduan->penyedia_id) }}">
+                                                                        </div>
+                                                                        <label for="keterangan">Keterangan</label>
+                                                                        <div class="form-group">
+                                                                            <textarea type="text" class="form-control" id="keterangan" name="keterangan">{{ old('keterangan', $pengaduan->keterangan) }}</textarea>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="bukti">Bukti</label>
+                                                                            <input type="file" id="bukti" name="bukti" class="form-control" placeholder="Name" value="{{ old('bukti', $pengaduan->bukti) }}">
+                                                                        </div>
                                                                     </div>
-
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                                            <i class="bx bx-x d-block d-sm-none"></i>
+                                                                            <span class="d-none d-sm-block">Batal</span>
+                                                                        </button>
+                                                                        <button type="submit" class="btn btn-primary ml-1">
+                                                                            Ubah Data
+                                                                        </button>
+                                                                    </div>
                                                                 </form>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <span><i class="fa fa-edit" style="color: #ffe600;"></i></span>
-                                                    <span><i class="fa fa-trash-alt" style="color: red;"></i></span>
+
+                                                    <form action="/pengaduanHelpdesk/{{ $pengaduan->id }}" method="post" class="d-inline">
+                                                        @method('delete')
+                                                        @csrf
+
+                                                        <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><span data-feather="x-circle"><i class="fa fa-trash-alt"></i></span></button>
+
+                                                    </form>
                                                 </td>
                                             </tr>
-
-                                            <tr>
-                                                <td>3</td>
-                                                <td>02/03/2022</td>
-                                                <td>12345</td>
-                                                <td>Akun tidak bisa dibuka</td>
-                                                <td>RS Awal Bros Pekanbaru</td>
-                                                <td>
-                                                    <span class="badge bg-danger">Ditolak</span>
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-info" data-bs-toggle="modal" data-bs-target="#inlineForm1" style="cursor:pointer">Disposisi</span>
-
-                                                    <!--login form Modal -->
-                                                    <div class="modal fade text-left" id="inlineForm1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title" id="myModalLabel33">Disposisi</h4>
-                                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                                        <i data-feather="x"></i>
-                                                                    </button>
-                                                                </div>
-                                                                <form action="#">
-                                                                    <div class="modal-body">
-                                                                        <p>Disposisi Kepada</p>
-                                                                        <fieldset class="form-group">
-                                                                            <select class="form-select" id="basicSelect">
-                                                                                <option>Nadia Asri</option>
-                                                                                <option>Alit</option>
-                                                                            </select>
-                                                                        </fieldset>
-                                                                    </div>
-
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <span><i class="fa fa-edit" style="color: #ffe600;"></i></span>
-                                                    <span><i class="fa fa-trash-alt" style="color: red;"></i></span>
-                                                </td>
-                                            </tr>
-
+                                            @endforeach
 
                                         </tbody>
                                     </table>

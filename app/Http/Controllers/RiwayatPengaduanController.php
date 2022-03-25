@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PenyediaRequest;
 use App\Models\Penyedia;
 use App\Models\Pengaduan;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class PenyediaController extends Controller
+class RiwayatPengaduanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,7 @@ class PenyediaController extends Controller
      */
     public function index()
     {
-        return view('penyedia.dashboardPenyedia', [
+        return view('penyedia.riwayatPengaduanPenyedia', [
             'pengaduans' => Pengaduan::all(),
             'penyedias' => Penyedia::all(),
             'users' => User::all()
@@ -31,17 +30,26 @@ class PenyediaController extends Controller
      */
     public function create()
     {
-        return view('penyedia.riwayatPengaduanPenyedia');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\PenyediaRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PenyediaRequest $request)
+    public function store(Request $request)
     {
+        Pengaduan::create([
+            'judul' => $request->judul,
+            'tanggal' => $request->tanggal,
+            'keterangan' => $request->keterangan,
+            'penyedia_id' => $request->penyedia_id,
+            'bukti' => $request->bukti,
+            'email' => $request->email,
+        ]);
+
+        return redirect('/riwayatPengaduanPenyedia')->with('success', 'Pengaduan Berhasil Ditambahkan');
     }
 
     /**
@@ -52,7 +60,11 @@ class PenyediaController extends Controller
      */
     public function show(Penyedia $penyedia)
     {
-        //
+        return view('penyedia.riwayatPengaduanPenyedia', [
+            'pengaduans' => Pengaduan::all(),
+            'penyedias' => Penyedia::all(),
+            'users' => User::all()
+        ]);
     }
 
     /**
@@ -69,11 +81,11 @@ class PenyediaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\PenyediaRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Penyedia  $penyedia
      * @return \Illuminate\Http\Response
      */
-    public function update(PenyediaRequest $request, Penyedia $penyedia)
+    public function update(Request $request, Penyedia $penyedia)
     {
         //
     }
@@ -88,14 +100,4 @@ class PenyediaController extends Controller
     {
         //
     }
-
-    public function tracking()
-    {
-        return view('penyedia.trackingPenyedia', [
-            'pengaduans' => Pengaduan::all(),
-            'penyedias' => Penyedia::all(),
-            'users' => User::all()
-        ]);
-    }
-
 }

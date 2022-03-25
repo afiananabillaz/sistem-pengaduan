@@ -16,10 +16,10 @@ return new class extends Migration
     {
         Schema::create('pengaduans', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Penyedia::class);
+            $table->foreignIdFor(Penyedia::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->date('tanggal');
             $table->string('judul');
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
             $table->string('bukti');
             $table->timestamps();
         });

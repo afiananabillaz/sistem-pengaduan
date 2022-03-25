@@ -17,8 +17,8 @@ return new class extends Migration
     {
         Schema::create('tanggapans', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Pengaduan::class);
-            $table->foreignIdFor(Pegawai::class);
+            $table->foreignIdFor(Pengaduan::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignIdFor(Pegawai::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->date('tanggal');
             $table->string('judul');
             $table->text('keterangan');

@@ -38,21 +38,21 @@
             <ul>
 
                 <li class="menu-item">
-                    <a href="/dashboardPenyedia" class='menu-link'>
+                    <a href="{{ route('penyedia.index') }}" class='menu-link'>
                         <i class="fa fa-plus-circle"></i>
                         <span>Tambah Pengaduan</span>
                     </a>
                 </li>
 
                 <li class="menu-item">
-                    <a href="/riwayatPengaduanPenyedia" class='menu-link'>
+                    <a href="{{ route('riwayat.index') }}" class='menu-link'>
                         <i class="fa fa-history"></i>
                         <span>Riwayat Pengaduan</span>
                     </a>
                 </li>
 
                 <li class="menu-item  ">
-                    <a href="/trackingPenyedia" class='menu-link'>
+                    <a href="{{ route('penyedia.tracking') }}" class='menu-link'>
                         <i class="fa fa-location-arrow"></i>
                         <span>Tracking</span>
                     </a>

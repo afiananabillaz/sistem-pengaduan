@@ -5,7 +5,6 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\PenyediaController;
 use App\Http\Controllers\RiwayatPengaduanController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,72 +22,39 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboardPenyedia', [PenyediaController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('penyedia.index');
+Route::controller(PenyediaController::class)->middleware(['auth', 'verified', 'is_penyedia'])->group(function () {
+    Route::get('dashboardPenyedia', 'index')->name('penyedia.index');
+    Route::get('trackingPenyedia', 'tracking')->name('penyedia.tracking');
+    Route::post('trackingPenyedia', 'store')->name('penyedia.store');
+});
 
-Route::get('/riwayatPengaduanPenyedia', [RiwayatPengaduanController::class, 'index'])
-    ->name('riwayat.index');
+Route::controller(RiwayatPengaduanController::class)->middleware(['auth', 'verified', 'is_penyedia'])->group(function () {
+    Route::get('riwayatPengaduanPenyedia', 'index')->name('riwayat.index');
+    Route::post('riwayatPengaduanPenyedia', 'store')->name('riwayat.store');
+});
 
-Route::post('/riwayatPengaduanPenyedia', [RiwayatPengaduanController::class, 'store'])
-    ->name('riwayat.store');
+Route::controller(HelpdeskController::class)->middleware(['auth', 'verified', 'is_helpdesk'])->group(function () {
+    Route::get('dashboardHelpdesk', 'index')->name('helpdesk.index');
+    Route::get('laporanHelpdesk', 'show')->name('helpdesk.show');
+    Route::get('akumulasiHelpdesk', 'akumulasi')->name('helpdesk.akumulasi');
+    Route::get('kelolaPengguna', 'pengguna')->name('helpdesk.pengguna');
+    Route::post('kelolaPengguna', 'store')->name('helpdesk.store');
+});
 
-Route::get('/trackingPenyedia', [PenyediaController::class, 'tracking'])
-    ->name('penyedia.tracking');
+Route::controller(PengaduanController::class)->middleware(['auth', 'verified', 'is_helpdesk'])->group(function () {
+    Route::get('pengaduanHelpdesk', 'index')->name('pengaduan.index');
+    Route::post('pengaduanHelpdesk', 'store')->name('pengaduan.store');
+    Route::post('laporanHelpdesk', 'store')->name('laporan.store');
+});
 
-Route::post('/trackingPenyedia', [PenyediaController::class, 'store'])
-    ->name('penyedia.tracking.store');
-
-
-Route::get('/dashboardHelpdesk', [HelpdeskController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('helpdesk.index');
-
-Route::get('/pengaduanHelpdesk', [PengaduanController::class, 'index'])
-    ->name('pengaduan.index');
-
-Route::post('/pengaduanHelpdesk', [PengaduanController::class, 'store'])
-    ->name('pengaduan.store');
-
-Route::get('/laporanHelpdesk', [HelpdeskController::class, 'show'])
-    ->name('helpdesk.show');
-
-Route::post('/laporanHelpdesk', [PengaduanController::class, 'store'])
-    ->name('laporan.store');
-
-Route::get('/akumulasiHelpdesk', [HelpdeskController::class, 'akumulasi'])
-    ->name('helpdesk.akumulasi');
-
-Route::post('/akumulasiHelpdesk', [PengaduanController::class, 'store'])
-    ->name('helpdesk.akumulasi.store');
-
-Route::get('/kelolaPengguna', [HelpdeskController::class, 'pengguna'])
-    ->name('helpdesk.pengguna');
-
-Route::post('/kelolaPengguna', [HelpdeskController::class, 'store'])
-    ->name('helpdesk.store');
-
-
-Route::get('/dashboardPegawai', [PegawaiController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('pegawai.index');
-
-Route::get('/pengaduanPegawai', [PegawaiController::class, 'show'])
-    ->name('pegawai.show');
-
-Route::post('/pengaduanPegawai', [PegawaiController::class, 'store'])
-    ->name('pegawai.store');
-
-Route::get('/tambahLayananPegawai', [PegawaiController::class, 'layanan'])
-    ->name('pegawai.layanan');
-
-Route::get('/riwayatLayananPegawai', [PegawaiController::class, 'riwayat'])
-    ->name('pegawai.riwayat');
-
-Route::post('/riwayatLayananPegawai', [PegawaiController::class, 'store'])
-    ->name('pegawai.store');
-
-Route::get('/trackingPegawai', [PegawaiController::class, 'tracking'])
-    ->name('pegawai.tracking');
+Route::controller(PegawaiController::class)->middleware(['auth', 'verified', 'is_pegawai'])->group(function () {
+    Route::get('dashboardPegawai', 'index')->name('pegawai.index');
+    Route::get('pengaduanPegawai', 'show')->name('pegawai.show');
+    Route::post('pengaduanPegawai', 'store')->name('pegawai.store');
+    Route::get('tambahLayananPegawai', 'layanan')->name('pegawai.layanan');
+    Route::get('riwayatLayananPegawai', 'riwayat')->name('pegawai.riwayat');
+    Route::post('riwayatLayananPegawai', 'simpan')->name('pegawai.simpan');
+    Route::get('trackingPegawai', 'tracking')->name('pegawai.tracking');
+});
 
 require __DIR__ . '/auth.php';

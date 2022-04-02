@@ -6,7 +6,6 @@ use App\Http\Requests\PenyediaRequest;
 use App\Models\Penyedia;
 use App\Models\Pengaduan;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class PenyediaController extends Controller
 {

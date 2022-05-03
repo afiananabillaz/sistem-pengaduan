@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PenyediaRequest;
+use App\Models\Tiket;
 use App\Models\Penyedia;
 use App\Models\Pengaduan;
-use App\Models\User;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PenyediaRequest;
+use App\Http\Requests\PengaduanRequest;
+use Illuminate\Http\Request;
 
 class PenyediaController extends Controller
 {
@@ -17,30 +21,47 @@ class PenyediaController extends Controller
     public function index()
     {
         return view('penyedia.dashboardPenyedia', [
-            'pengaduans' => Pengaduan::all(),
-            'penyedias' => Penyedia::all(),
-            'users' => User::all()
+            'penyedias' => Penyedia::where('user_id', Auth::user()->id)->get(),
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('penyedia.riwayatPengaduanPenyedia');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\PenyediaRequest  $request
+     * @param  \App\Http\Requests\PengaduanRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PenyediaRequest $request)
+    public function store(PengaduanRequest $request)
     {
+        $bukti = $request->file('bukti');
+        $tujuan = 'storage/bukti';
+        $bukti->move($tujuan, $bukti->getClientOriginalName());
+
+        $data = $request->all();
+        $data['penyedia_id'] = auth()->user()->id;
+        $data['bukti'] = $request->file('bukti')->getClientOriginalName();
+        Pengaduan::create($data);
+
+        $pengaduan = Pengaduan::where('penyedia_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+
+        $kode = Tiket::orderBy('created_at', 'desc')->first();
+
+        if ($kode) {
+            $orderNr = $kode['kode'];
+            $removed1char = substr($orderNr, 4);
+            $int = (int)$removed1char;
+            $generateOrder_nr = $stpad = 'BPJ-' . str_pad($int + 1, 4, "0", STR_PAD_LEFT);
+        } else {
+            $generateOrder_nr = 'BPJ-' . str_pad(1, 4, "0", STR_PAD_LEFT);
+        }
+
+        Tiket::create([
+            'pengaduan_id' => $pengaduan['id'],
+            'kode' => $generateOrder_nr,
+            'keterangan' => 'belum diproses',
+        ]);
+
+        return to_route('penyedia.tiket');
     }
 
     /**
@@ -91,10 +112,26 @@ class PenyediaController extends Controller
     public function tracking()
     {
         return view('penyedia.trackingPenyedia', [
-            'pengaduans' => Pengaduan::all(),
-            'penyedias' => Penyedia::all(),
-            'users' => User::all()
+            'tikets' => [],
+            'penyedias' => Penyedia::where('user_id', auth()->user()->id)->get(),
         ]);
     }
 
+    public function kode(Request $request)
+    {
+        return view('penyedia.trackingPenyedia', [
+            'tikets' => Tiket::where('kode', $request->kode)->get(),
+            'penyedias' => Penyedia::where('user_id', auth()->user()->id)->get(),
+        ]);
+    }
+
+    public function tiket()
+    {
+        $pengaduan = Pengaduan::where('penyedia_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+
+        return view('penyedia.tiketPenyedia', [
+            'tikets' => Tiket::where('pengaduan_id', $pengaduan['id'])->get(),
+            'penyedias' => Penyedia::where('user_id', auth()->user()->id)->get(),
+        ]);
+    }
 }

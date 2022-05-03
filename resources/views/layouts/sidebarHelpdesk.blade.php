@@ -27,7 +27,7 @@
             </li>
 
             <li class="sidebar-item  ">
-                <a href="{{ route('helpdesk.show') }}" class='sidebar-link'>
+                <a href="{{ route('pengaduan.laporan') }}" class='sidebar-link'>
                     <i class="bi bi-book-fill"></i>
                     <span>Laporan</span>
                 </a>

@@ -29,5 +29,6 @@ class PengaduanRequest extends FormRequest
             'keterangan' => 'required',
             'bukti' => 'required'
         ];
+        
     }
 }

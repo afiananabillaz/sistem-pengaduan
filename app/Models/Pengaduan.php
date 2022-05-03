@@ -13,6 +13,11 @@ class Pengaduan extends Model
 
     public function penyedia()
     {
-        return $this->hasMany(Penyedia::class);
+        return $this->belongsTo(Penyedia::class);
+    }
+
+    public function tiketPengaduan()
+    {
+        return $this->hasMany(Tiket::class);
     }
 }

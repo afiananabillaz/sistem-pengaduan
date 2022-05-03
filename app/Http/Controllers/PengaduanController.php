@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PengaduanRequest;
 use App\Models\Tiket;
 use App\Models\Penyedia;
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PengaduanRequest;
+use App\Models\Helpdesk;
 
 class PengaduanController extends Controller
 {
@@ -18,9 +21,11 @@ class PengaduanController extends Controller
     public function index()
     {
         return view('helpdesk.pengaduanHelpdesk', [
+            'helpdesks' => Helpdesk::all(),
             'pengaduans' => Pengaduan::all(),
-            'tikets' => Tiket::where('kode')->get(),
-            'penyedias' => Penyedia::where('nama')->get()
+            'tikets' => Tiket::all(),
+            'penyedias' => Penyedia::all(),
+            'pegawais' => Penyedia::where('user_id', Auth::user()->id)->get(),
         ]);
     }
 
@@ -42,17 +47,34 @@ class PengaduanController extends Controller
      */
     public function store(PengaduanRequest $request)
     {
-        Pengaduan::create([
-            'tiket_id' => $request->tiket_id,
-            'penyedia_id' => $request->penyedia_id,
-            'tanggal' => $request->tanggal,
-            'judul' => $request->judul,
-            'keterangan' => $request->keterangan,
-            'bukti' => $request->bukti,
-            'nama' => $request->nama,
+        $bukti = $request->file('bukti');
+        $tujuan = 'storage/bukti';
+        $bukti->move($tujuan, $bukti->getClientOriginalName());
+
+        $data = $request->all();
+        $data['bukti'] = $request->file('bukti')->getClientOriginalName();
+        Pengaduan::create($data);
+
+        $pengaduan = Pengaduan::where('penyedia_id', $request->penyedia_id)->orderBy('created_at', 'desc')->first();
+
+        $kode = Tiket::orderBy('created_at', 'desc')->first();
+
+        if ($kode) {
+            $orderNr = $kode['kode'];
+            $removed1char = substr($orderNr, 4);
+            $int = (int)$removed1char;
+            $generateOrder_nr = $stpad = 'BPJ-' . str_pad($int + 1, 4, "0", STR_PAD_LEFT);
+        } else {
+            $generateOrder_nr = 'BPJ-' . str_pad(1, 4, "0", STR_PAD_LEFT);
+        }
+
+        Tiket::create([
+            'pengaduan_id' => $pengaduan['id'],
+            'kode' => $generateOrder_nr,
+            'keterangan' => 'belum diproses',
         ]);
 
-        return redirect()->route('pengaduan.index');
+        return to_route('pengaduan.index');
     }
 
     /**
@@ -74,7 +96,12 @@ class PengaduanController extends Controller
      */
     public function edit(Pengaduan $pengaduan)
     {
-        //
+        return view('helpdesk.pengaduanHelpdesk', [
+            'pengaduan' => $pengaduan,
+            'tikets' => Tiket::all(),
+            'penyedias' => Penyedia::all(),
+            'pegawais' => Penyedia::where('user_id', Auth::user()->id)->get(),
+        ]);
     }
 
     /**
@@ -84,8 +111,25 @@ class PengaduanController extends Controller
      * @param  \App\Models\Pengaduan  $pengaduan
      * @return \Illuminate\Http\Response
      */
-    public function update(PengaduanRequest $request, Pengaduan $pengaduan)
+    public function update(PengaduanRequest $request, $pengaduan)
     {
+        $bukti = $request->file('bukti');
+        $tujuan = 'storage/bukti';
+        $bukti->move($tujuan, $bukti->getClientOriginalName());
+
+        $data = $request->all();
+
+        if ($request->file('bukti')) {
+            $data['bukti'] = $request->file('bukti')->getClientOriginalName();
+        } else {
+            $bukti = Pengaduan::where('id', $pengaduan)->get();
+            $data['bukti'] = $bukti[0]->bukti;
+        }
+
+        $cek = Pengaduan::findOrFail($pengaduan);
+        $cek->update($data);
+
+        return to_route('pengaduan.index');
     }
 
     /**
@@ -94,10 +138,18 @@ class PengaduanController extends Controller
      * @param  \App\Models\Pengaduan  $pengaduan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pengaduan $pengaduan)
+    public function destroy($pengaduan)
     {
-        Pengaduan::destroy($pengaduan->id);
+        Pengaduan::destroy($pengaduan);
 
-        return redirect('/pengaduanHelpdesk')->with('success', 'Pengaduan Berhasil Dihapus');
+        return to_route('pengaduan.index');
+    }
+
+    public function laporan()
+    {
+        return view('helpdesk.laporanHelpdesk', [
+            'pengaduans' => Pengaduan::all(),
+            'helpdesks' => Helpdesk::all(),
+        ]);
     }
 }

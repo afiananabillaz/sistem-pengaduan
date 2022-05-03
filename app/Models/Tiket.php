@@ -10,4 +10,9 @@ class Tiket extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function tiket()
+    {
+        return $this->belongsTo(Pengaduan::class);
+    }
 }

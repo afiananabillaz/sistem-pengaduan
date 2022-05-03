@@ -6,30 +6,34 @@
                 <section class="section">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="basicInput">Masukkan Kode Tiket</label>
-                                        <input type="text" class="form-control" id="basicInput">
-                                    </div>
+                            <form action="{{ route('penyedia.kode') }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="basicInput">Masukkan Kode Tiket</label>
+                                            <input type="text" class="form-control" id="basicInput" name="kode">
+                                        </div>
 
-                                    <div class="form-actions d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary">Lacak</button>
+                                        <div class="form-actions d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary">Lacak</button>
+                                        </div>
                                     </div>
-
                                 </div>
+                            </form>
 
-                            </div>
+                            @if ($tikets == null)
+                            
+                            @else
 
                             <div class="row">
                                 <div class="col-md-4 mt-4">
                                     <div class="form-group">
-                                        <label for="basicInput"><strong>Kode Tiket Anda: PP01</strong></label>
-
+                                        @foreach ($tikets as $kodetiket )                                            
+                                        @endforeach
+                                        <h5>Kode Tiket Anda: {{ $kodetiket->kode }}</h5>
                                     </div>
-
                                 </div>
-
                             </div>
                             <table class="table table-striped w-50" id="table1">
                                 <thead>
@@ -40,21 +44,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @forelse ($tikets as $tiket)
                                     <tr>
-                                        <td>1</td>
-                                        <td>03-03-2022 23:01:00</td>
-                                        <td>Sedang Diproses</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ date_format($tiket->updated_at, 'Y-m-d H:i:s') }} </td>
+                                        <td>{{ $tiket->keterangan }}</td>
                                     </tr>
-
+                                    @empty
                                     <tr>
-                                        <td>2</td>
-                                        <td>04-03-2022 23:01:00</td>
-                                        <td>Diterima <i class="bi bi-zoom-in"></i></td>
-
+                                        <td colspan="3">Silahkan masukkan kode Tiket Anda</td>
                                     </tr>
-
+                                    @endforelse
                                 </tbody>
                             </table>
+                            @endif
                         </div>
                     </div>
 
@@ -65,4 +68,4 @@
             </div>
 
 
-</x-penyedia-layout>
+            </x-penyedia-layout>

@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PegawaiRequest;
+use App\Models\Tiket;
 use App\Models\Pegawai;
+use App\Models\Penyedia;
+use App\Models\Pengaduan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PegawaiRequest;
 
 class PegawaiController extends Controller
 {
@@ -15,8 +20,11 @@ class PegawaiController extends Controller
      */
     public function index()
     {
+        $sedangproses = Tiket::where('keterangan', '=', 'sedang diproses')->count();
+
         return view('pegawai.dashboardPegawai', [
-            'pegawais' => Pegawai::all(),
+            'pegawais' => Pegawai::where('user_id', Auth::user()->id)->get(),
+            'sedangproses' => $sedangproses,
         ]);
     }
 
@@ -38,7 +46,34 @@ class PegawaiController extends Controller
      */
     public function store(PegawaiRequest $request)
     {
-        //
+        // $bukti = $request->file('bukti');
+        // $tujuan = 'storage/bukti';
+        // $bukti->move($tujuan, $bukti->getClientOriginalName());
+
+        // $data = $request->all();
+        // $data['bukti'] = $request->file('bukti')->getClientOriginalName();
+        // Pengaduan::create($data);
+
+        // $pengaduan = Pengaduan::where('penyedia_id', $request->penyedia_id)->orderBy('created_at', 'desc')->first();
+
+        // $kode = Tiket::orderBy('created_at', 'desc')->first();
+
+        // if ($kode) {
+        //     $orderNr = $kode['kode'];
+        //     $removed1char = substr($orderNr, 4);
+        //     $int = (int)$removed1char;
+        //     $generateOrder_nr = $stpad = 'BPJ-' . str_pad($int + 1, 4, "0", STR_PAD_LEFT);
+        // } else {
+        //     $generateOrder_nr = 'BPJ-' . str_pad(1, 4, "0", STR_PAD_LEFT);
+        // }
+
+        // Tiket::create([
+        //     'pengaduan_id' => $pengaduan['id'],
+        //     'kode' => $generateOrder_nr,
+        //     'keterangan' => 'belum diproses',
+        // ]);
+
+        // return to_route('pengaduan.index');
     }
 
     /**
@@ -92,6 +127,7 @@ class PegawaiController extends Controller
     {
         return view('pegawai.tambahLayananPegawai', [
             'pegawais' => Pegawai::all(),
+            'penyedias' => Penyedia::all(),
         ]);
     }
 
@@ -99,6 +135,8 @@ class PegawaiController extends Controller
     {
         return view('pegawai.riwayatLayananPegawai', [
             'pegawais' => Pegawai::all(),
+            'pengaduans' => Pengaduan::all(),
+            'penyedias' => Penyedia::all(),
         ]);
     }
 
@@ -107,5 +145,37 @@ class PegawaiController extends Controller
         return view('pegawai.trackingPegawai', [
             'pegawais' => Pegawai::all(),
         ]);
+    }
+
+    public function simpan(Request $request)
+    {
+        $bukti = $request->file('bukti');
+        $tujuan = 'storage/bukti';
+        $bukti->move($tujuan, $bukti->getClientOriginalName());
+
+        $data = $request->all();
+        $data['bukti'] = $request->file('bukti')->getClientOriginalName();
+        Pengaduan::create($data);
+
+        $pengaduan = Pengaduan::where('penyedia_id', $request->penyedia_id)->orderBy('created_at', 'desc')->first();
+
+        $kode = Tiket::orderBy('created_at', 'desc')->first();
+
+        if ($kode) {
+            $orderNr = $kode['kode'];
+            $removed1char = substr($orderNr, 4);
+            $int = (int)$removed1char;
+            $generateOrder_nr = $stpad = 'BPJ-' . str_pad($int + 1, 4, "0", STR_PAD_LEFT);
+        } else {
+            $generateOrder_nr = 'BPJ-' . str_pad(1, 4, "0", STR_PAD_LEFT);
+        }
+
+        Tiket::create([
+            'pengaduan_id' => $pengaduan['id'],
+            'kode' => $generateOrder_nr,
+            'keterangan' => 'sedang diproses',
+        ]);
+
+        return redirect()->route('pegawai.riwayat');
     }
 }

@@ -50,33 +50,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($pengaduans as $pengaduan )
                                         <tr>
-                                            <td>1</td>
-                                            <td>02/03/2022</td>
-                                            <td>12345</td>
-                                            <td>Akun tidak bisa dibuka</td>
-                                            <td>RS Awal Bros Pekanbaru</td>
-
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $pengaduan->tanggal }}</td>
+                                            <td>{{ $pengaduan->tiketPengaduan[0]->kode }}</td>
+                                            <td>{{ $pengaduan->judul }}</td>
+                                            <td>{{ $pengaduan->penyedia->nama }}</td>
                                         </tr>
-
-                                        <tr>
-                                            <td>2</td>
-                                            <td>02/03/2022</td>
-                                            <td>12345</td>
-                                            <td>Akun tidak bisa dibuka</td>
-                                            <td>RS Awal Bros Pekanbaru</td>
-
-                                        </tr>
-
-                                        <tr>
-                                            <td>1</td>
-                                            <td>02/03/2022</td>
-                                            <td>12345</td>
-                                            <td>Akun tidak bisa dibuka</td>
-                                            <td>RS Awal Bros Pekanbaru</td>
-
-                                        </tr>
-
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

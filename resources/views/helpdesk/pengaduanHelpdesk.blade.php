@@ -34,17 +34,24 @@
                                                     </button>
                                                 </div>
 
-                                                <form action="{{ route('pengaduan.index') }}" method="post" enctype="multipart/form-data">
+                                                <form action="{{ route('pengaduan.store') }}" method="post" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <input type="hidden" name="tanggal" value="{{ date('Y-m-d') }}">
+
+                                                        <div class="form-group">
+                                                            <label for="penyedia">Penyedia</label>
+                                                            <select name="penyedia_id" id="penyedia" class="form-select">
+                                                                <option value="">---Pilih Penyedia---</option>
+                                                                @foreach ($penyedias as $penyedia)
+                                                                <option value="{{ $penyedia->id }}">{{ $penyedia->nama }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
                                                         <label for="judul">Judul</label>
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" id="judul" name="judul">
-                                                        </div>
-                                                        <label for="penyedia_id">Penyedia/Instansi</label>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" id="penyedia_id" name="penyedia_id">
                                                         </div>
                                                         <label for="keterangan">Keterangan</label>
                                                         <div class="form-group">
@@ -85,12 +92,15 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $pengaduan->tanggal }}</td>
-                                                <td>{{ $pengaduan->kode }}</td>
+
+                                                <td>{{ $pengaduan->tiketPengaduan[0]->kode }}</td>
                                                 <td>{{ $pengaduan->judul }}</td>
-                                                <td>{{ $pengaduan->penyedia_id }}</td>
+                                                <td>{{ $pengaduan->penyedia->nama }}</td>
+
                                                 <td>
-                                                    <span class="badge bg-warning">Sedang Diproses</span>
+                                                    <span class="badge bg-warning">{{ $pengaduan->tiketPengaduan[0]->keterangan }}</span>
                                                 </td>
+
                                                 <td>
                                                     <span class="badge bg-info" data-bs-toggle="modal" data-bs-target="#inlineForm1" style="cursor:pointer">Disposisi</span>
 
@@ -108,20 +118,33 @@
                                                                     <div class="modal-body">
                                                                         <p>Disposisi Kepada</p>
                                                                         <fieldset class="form-group">
-                                                                            <select class="form-select" id="basicSelect">
-                                                                                <option>Nadia Asri</option>
-                                                                                <option>Alit</option>
+                                                                            <select class="form-select" id="pegawai_id" name="pegawai_id">
+                                                                                <option value="">---Pilih Dipsosisi---</option>
+                                                                                @foreach ($pegawais as $pegawai)
+                                                                                <option value="{{ $pegawai->id }}">{{ $pegawai->nama }}</option>
+                                                                                @endforeach
                                                                             </select>
                                                                         </fieldset>
                                                                     </div>
-
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                                            <i class="bx bx-x d-block d-sm-none"></i>
+                                                                            <span class="d-none d-sm-block">Batal</span>
+                                                                        </button>
+                                                                        <button type="submit" class="btn btn-primary ml-1">
+                                                                            Simpan
+                                                                        </button>
+                                                                    </div>
                                                                 </form>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button data-bs-toggle="modal" data-bs-target="#inlineForm2" class="badge bg-success border-0"><i class="fa fa-edit"></i></button>
+                                                    <button data-bs-toggle="modal" data-bs-target="#edit{{ $pengaduan->id }}" class="badge bg-success border-0"><i class="fa fa-edit"></i></button>
 
-                                                    <div class="modal fade text-left" id="inlineForm2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                    <button data-bs-toggle="modal" data-bs-target="#hapus{{ $pengaduan->id }}" class="badge bg-danger border-0"><i class="fa fa-trash"></i></button>
+
+
+                                                    <div class="modal fade text-left" id="edit{{ $pengaduan->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -130,25 +153,33 @@
                                                                         <i data-feather="x"></i>
                                                                     </button>
                                                                 </div>
-                                                                <form action="{{ route('pengaduan.index') }}" method="post" enctype="multipart/form-data">
+                                                                <form action="{{ route('pengaduan.update', ['id'=> $pengaduan->id]) }}" method="post" enctype="multipart/form-data">
                                                                     @csrf
+                                                                    @method('PUT')
                                                                     <div class="modal-body">
                                                                         <input type="hidden" name="tanggal" value="{{ date('Y-m-d') }}">
                                                                         <label for="judul">Judul</label>
                                                                         <div class="form-group">
                                                                             <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul', $pengaduan->judul) }}">
                                                                         </div>
-                                                                        <label for="penyedia_id">Penyedia/Instansi</label>
+
                                                                         <div class="form-group">
-                                                                            <input type="text" class="form-control" id="penyedia_id" name="penyedia_id" value="{{ old('penyedia_id', $pengaduan->penyedia_id) }}">
+                                                                            <label for="penyedia">Penyedia</label>
+                                                                            <select name="penyedia_id" id="penyedia" class="form-select">
+                                                                                <option value="{{ old('penyedia_id', $pengaduan->penyedia_id) }}">{{ $pengaduan->penyedia->nama }}</option>
+                                                                                @foreach ($penyedias as $penyedia)
+                                                                                <option value="{{ old('penyedia_id', $penyedia->id) }}">{{ $penyedia->nama }}</option>
+                                                                                @endforeach
+                                                                            </select>
                                                                         </div>
+
                                                                         <label for="keterangan">Keterangan</label>
                                                                         <div class="form-group">
                                                                             <textarea type="text" class="form-control" id="keterangan" name="keterangan">{{ old('keterangan', $pengaduan->keterangan) }}</textarea>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="bukti">Bukti</label>
-                                                                            <input type="file" id="bukti" name="bukti" class="form-control" placeholder="Name" value="{{ old('bukti', $pengaduan->bukti) }}">
+                                                                            <input type="file" id="bukti" name="bukti" class="form-control" placeholder="Name">
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
@@ -165,17 +196,43 @@
                                                         </div>
                                                     </div>
 
-                                                    <form action="/pengaduanHelpdesk/{{ $pengaduan->id }}" method="post" class="d-inline">
-                                                        @method('delete')
-                                                        @csrf
+                                                    <div class="modal fade text-left" id="hapus{{ $pengaduan->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title" id="myModalLabel33">Hapus Pengaduan</h4>
+                                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                        <i data-feather="x"></i>
+                                                                    </button>
+                                                                </div>
 
-                                                        <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><span data-feather="x-circle"><i class="fa fa-trash-alt"></i></span></button>
+                                                                <div class="modal-body">
+                                                                    <p>
+                                                                        Apakah Anda yakin ingin menghapus pengaduan ini?
+                                                                    </p>
+                                                                </div>
 
-                                                    </form>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                                                        <span class="d-none d-sm-block">Batal</span>
+                                                                    </button>
+                                                                    <form action="{{ route('pengaduan.destroy', ['id' => $pengaduan->id]) }}" method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="btn btn-danger ml-1">
+                                                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                                                            <span class="d-none d-sm-block">Hapus</span>
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             @endforeach
-
                                         </tbody>
                                     </table>
                                 </div>

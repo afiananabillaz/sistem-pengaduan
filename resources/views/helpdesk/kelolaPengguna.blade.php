@@ -33,7 +33,7 @@
                                                         <i data-feather="x"></i>
                                                     </button>
                                                 </div>
-                                                <form action="{{ route('helpdesk.pengguna') }}" method="post" enctype="multipart/form-data">
+                                                <form action="{{ route('helpdesk.store') }}" method="post" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <label for="email">Email </label>

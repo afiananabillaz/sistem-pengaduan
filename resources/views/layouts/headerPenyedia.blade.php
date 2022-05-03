@@ -12,17 +12,25 @@
                             <img src="{{ asset('assets/images/faces/1.jpg') }}" alt="Avatar">
                         </div>
                         <div class="text">
-                            <h6 class="user-dropdown-name">Anita</h6>
+                            @foreach ($penyedias as $penyedia )
+                            @endforeach
+                            <h6 class="user-dropdown-name">{{ $penyedia->nama }}</h6>
                             <p class="user-dropdown-status text-sm text-muted">Penyedia</p>
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="dropdownMenuButton1">
-                        <!-- <li><a class="dropdown-item" href="#">My Account</a></li>
-                                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li> -->
-                        <li><a class="dropdown-item" href="auth-login.html">Logout</a></li>
+                        <li>
+                            @foreach ($penyedias as $penyedia )
+                            @endforeach
+                            <h6 class="dropdown-header">Hello, {{ $penyedia->nama }}</h6>
+                        </li>
+
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item">Keluar</button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
 
@@ -54,7 +62,7 @@
                 <li class="menu-item  ">
                     <a href="{{ route('penyedia.tracking') }}" class='menu-link'>
                         <i class="fa fa-location-arrow"></i>
-                        <span>Tracking</span>
+                        <span>Lacak</span>
                     </a>
                 </li>
 

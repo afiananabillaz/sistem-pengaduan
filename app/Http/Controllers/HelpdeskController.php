@@ -8,6 +8,8 @@ use App\Models\Penyedia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HelpdeskRequest;
 use App\Models\Pegawai;
+use App\Models\Pengaduan;
+use App\Models\Tiket;
 use Illuminate\Support\Facades\Hash;
 
 class HelpdeskController extends Controller
@@ -19,12 +21,13 @@ class HelpdeskController extends Controller
      */
     public function index()
     {
+        $sedangproses = Tiket::where('keterangan', '=', 'sedang diproses')->count();
+
         return view('helpdesk.dashboardHelpdesk', [
             'helpdesks' => Helpdesk::all(),
             'penyedias' => Penyedia::all(),
             'pegawais' => Pegawai::all(),
-            'users' => User::all(),
-            'penggunas' => User::all()
+            'sedangproses' => $sedangproses,
         ]);
     }
 
@@ -100,7 +103,6 @@ class HelpdeskController extends Controller
         Helpdesk::destroy($helpdesk->id);
 
         return redirect()->route('helpdesk.index');
-
     }
 
     public function show(Helpdesk $helpdesk)

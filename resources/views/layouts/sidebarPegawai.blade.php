@@ -43,7 +43,7 @@
                         <li class="sidebar-item  ">
                             <a href="{{ route('pegawai.tracking') }}" class='sidebar-link'>
                                 <i class="bi bi-eye-fill"></i>
-                                <span>Tracking</span>
+                                <span>Lacak</span>
                             </a>
                         </li>
 

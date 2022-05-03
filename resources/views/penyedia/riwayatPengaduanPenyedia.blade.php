@@ -23,10 +23,10 @@
                                     <tbody>
                                         @foreach ($pengaduans as $pengaduan)
                                         <tr>
-                                            <td>{{ $pengaduan->email }}</td>
+                                            <td>{{ Auth::user()->email }}</td>
                                             <td>{{ $pengaduan->judul }}</td>
                                             <td>{{ $pengaduan->keterangan }}</td>
-                                            <td><a href="">{{ $pengaduan->bukti }}</a></td>
+                                            <td><a style="background:#435ebe; border:1px solid transparent; color:white; border-radius:.25rem; padding:.35em .65em; cursor:pointer" href="storage/bukti/{{ $pengaduan->bukti  }}" download>Download File</a></td>
                                         </tr>
                                         @endforeach
                                     </tbody>

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Penyedia;
 use App\Models\Pengaduan;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class RiwayatPengaduanController extends Controller
 {
@@ -17,9 +19,8 @@ class RiwayatPengaduanController extends Controller
     public function index()
     {
         return view('penyedia.riwayatPengaduanPenyedia', [
-            'pengaduans' => Pengaduan::all(),
-            'penyedias' => Penyedia::all(),
-            'users' => User::all()
+            'pengaduans' => Pengaduan::where('penyedia_id', Auth::user()->id)->get(),
+            'penyedias' => Penyedia::where('user_id', Auth::user()->id)->get()
         ]);
     }
 
@@ -45,11 +46,11 @@ class RiwayatPengaduanController extends Controller
             'tanggal' => $request->tanggal,
             'keterangan' => $request->keterangan,
             'penyedia_id' => $request->penyedia_id,
-            'bukti' => $request->bukti,
+            'bukti' => $request->file('bukti')->store('assets/bukti', 'public'),
             'email' => $request->email,
         ]);
 
-        return redirect('/riwayatPengaduanPenyedia')->with('success', 'Pengaduan Berhasil Ditambahkan');
+        return redirect('/riwayatPengaduanPenyedia');
     }
 
     /**

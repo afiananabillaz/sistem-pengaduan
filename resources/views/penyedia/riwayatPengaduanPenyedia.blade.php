@@ -1,5 +1,4 @@
 <x-penyedia-layout>
-
     <div id="app">
         <div id="main" class="layout-horizontal">
             @include('layouts.headerPenyedia')
@@ -7,9 +6,6 @@
                 <div class="page-heading">
                     <section class="section">
                         <div class="card">
-                            <h4 class="card-header">
-                                Riwayat Pengaduan
-                            </h4>
                             <div class="card-body">
                                 <table class="table table-striped" id="table1">
                                     <thead>
@@ -36,8 +32,6 @@
 
                     </section>
                 </div>
-
-
                 @include('layouts.footer')
             </div>
 

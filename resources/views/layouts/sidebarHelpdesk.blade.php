@@ -19,25 +19,34 @@
                 </a>
             </li>
 
-            <li class="sidebar-item  ">
-                <a href="{{ route('pengaduan.index') }}" class='sidebar-link'>
+            <li class="sidebar-item  has-sub">
+                <a href="#" class='sidebar-link'>
                     <i class="bi bi-person-plus-fill"></i>
-                    <span>Pengaduan</span>
+                    <span>Pengaduan & Layanan</span>
                 </a>
+                <ul class="submenu ">
+                    <li class="submenu-item ">
+                        <a href="{{ route('pengaduan.index') }}">Pengaduan</a>
+                    </li>
+                    <li class="submenu-item ">
+                        <a href="{{ route('layanan.index') }}">Layanan</a>
+                    </li>
+                </ul>
             </li>
 
-            <li class="sidebar-item  ">
-                <a href="{{ route('pengaduan.laporan') }}" class='sidebar-link'>
+            <li class="sidebar-item  has-sub">
+                <a href="#" class='sidebar-link'>
                     <i class="bi bi-book-fill"></i>
                     <span>Laporan</span>
                 </a>
-            </li>
-
-            <li class="sidebar-item  ">
-                <a href="{{ route('helpdesk.akumulasi') }}" class='sidebar-link'>
-                    <i class="bi bi-bar-chart-fill"></i>
-                    <span>Akumulasi</span>
-                </a>
+                <ul class="submenu ">
+                    <li class="submenu-item ">
+                        <a href="{{ route('pengaduan.laporan') }}">Pengaduan</a>
+                    </li>
+                    <li class="submenu-item ">
+                        <a href="{{ route('layanan.laporan') }}">Layanan</a>
+                    </li>
+                </ul>
             </li>
 
             <li class="sidebar-item  ">

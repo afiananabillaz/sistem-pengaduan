@@ -10,6 +10,9 @@
                     <div class="page-heading">
                         <section class="section">
                             <div class="card">
+                                <h4 class="card-header">
+                                    Riwayat Layanan
+                                </h4>
                                 <div class="card-body">
                                     <table class="table table-striped" id="table1">
                                         <thead>
@@ -21,12 +24,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($pengaduans as $pengaduan)
+                                            @foreach ($layanans as $layanan)
                                             <tr>
                                                 <td>{{ Auth::user()->email }}</td>
-                                                <td>{{ $pengaduan->judul }}</td>
-                                                <td>{{ $pengaduan->keterangan }}</td>
-                                                <td><a style="background:#435ebe; border:1px solid transparent; color:white; border-radius:.25rem; padding:.35em .65em; cursor:pointer" href="storage/bukti/{{ $pengaduan->bukti  }}" download>Download File</a></td>
+                                                <td>{{ $layanan->judul }}</td>
+                                                <td>{{ $layanan->keterangan }}</td>
+                                                <td><a style="background:#435ebe; border:1px solid transparent; color:white; border-radius:.25rem; padding:.35em .65em; cursor:pointer" href="storage/bukti/{{ $layanan->bukti  }}" download>Download File</a></td>
                                             </tr>
                                             @endforeach
                                         </tbody>

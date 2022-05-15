@@ -24,9 +24,7 @@ class TanggapanRequest extends FormRequest
     public function rules()
     {
         return [
-            'tanggal' => 'required|date',
-            'judul' => 'required|max:255|string',
-            'keterangan' => 'required',
+            'status' => 'required',
             'dokumen' => 'required'
         ];
     }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Pengaduan::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('kode');
-            $table->enum('keterangan', ['belum diproses', 'sedang diproses', 'selesai']);
+            $table->enum('keterangan', ['belum diproses', 'sedang diproses', 'diterima', 'ditolak']);
             $table->timestamps();
         });
     }

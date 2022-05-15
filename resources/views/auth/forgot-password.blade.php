@@ -5,7 +5,7 @@
             <div class="col-lg-6" style="margin-top: 100px;">
                 <div id="auth-left">
 
-                    <p>Silahkan Masukkan Email Anda. Kami akan mengirimkan email untuk reset password.</p>
+                    <p>Silahkan masukkan email Anda. Kami akan mengirimkan email untuk reset password.</p>
 
                     <!-- Session Status -->
                     <x-auth-session-status class="mb-4" :status="session('status')" />

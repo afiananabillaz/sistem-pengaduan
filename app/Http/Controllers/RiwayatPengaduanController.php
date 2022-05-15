@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Penyedia;
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
@@ -18,8 +17,10 @@ class RiwayatPengaduanController extends Controller
      */
     public function index()
     {
+        $penyedia = Penyedia::where('user_id', Auth::user()->id)->first();
+
         return view('penyedia.riwayatPengaduanPenyedia', [
-            'pengaduans' => Pengaduan::where('penyedia_id', Auth::user()->id)->get(),
+            'pengaduans' => Pengaduan::where('penyedia_id', $penyedia['id'])->get(),
             'penyedias' => Penyedia::where('user_id', Auth::user()->id)->get()
         ]);
     }
@@ -50,22 +51,7 @@ class RiwayatPengaduanController extends Controller
             'email' => $request->email,
         ]);
 
-        return redirect('/riwayatPengaduanPenyedia');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Penyedia  $penyedia
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Penyedia $penyedia)
-    {
-        return view('penyedia.riwayatPengaduanPenyedia', [
-            'pengaduans' => Pengaduan::all(),
-            'penyedias' => Penyedia::all(),
-            'users' => User::all()
-        ]);
+        return to_route('riwayat.index');
     }
 
     /**

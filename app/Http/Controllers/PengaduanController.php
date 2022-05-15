@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Tiket;
 use App\Models\Penyedia;
 use App\Models\Pengaduan;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PengaduanRequest;
 use App\Models\Helpdesk;
+use App\Models\Pegawai;
+use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PengaduanController extends Controller
 {
@@ -25,7 +27,7 @@ class PengaduanController extends Controller
             'pengaduans' => Pengaduan::all(),
             'tikets' => Tiket::all(),
             'penyedias' => Penyedia::all(),
-            'pegawais' => Penyedia::where('user_id', Auth::user()->id)->get(),
+            'pegawais' => Pegawai::all(),
         ]);
     }
 
@@ -52,6 +54,7 @@ class PengaduanController extends Controller
         $bukti->move($tujuan, $bukti->getClientOriginalName());
 
         $data = $request->all();
+        $data['disposisi'] = 0;
         $data['bukti'] = $request->file('bukti')->getClientOriginalName();
         Pengaduan::create($data);
 
@@ -73,6 +76,8 @@ class PengaduanController extends Controller
             'kode' => $generateOrder_nr,
             'keterangan' => 'belum diproses',
         ]);
+
+        Alert::success('Berhasil', 'Pengaduan berhasil ditambahkan');
 
         return to_route('pengaduan.index');
     }
@@ -100,7 +105,7 @@ class PengaduanController extends Controller
             'pengaduan' => $pengaduan,
             'tikets' => Tiket::all(),
             'penyedias' => Penyedia::all(),
-            'pegawais' => Penyedia::where('user_id', Auth::user()->id)->get(),
+            'pegawais' => Pegawai::where('user_id', Auth::user()->id)->get(),
         ]);
     }
 
@@ -113,13 +118,13 @@ class PengaduanController extends Controller
      */
     public function update(PengaduanRequest $request, $pengaduan)
     {
-        $bukti = $request->file('bukti');
-        $tujuan = 'storage/bukti';
-        $bukti->move($tujuan, $bukti->getClientOriginalName());
-
         $data = $request->all();
+        $data['disposisi'] = 0;
 
         if ($request->file('bukti')) {
+            $tujuan = 'storage/bukti';
+            $bukti = $request->file('bukti');
+            $bukti->move($tujuan, $bukti->getClientOriginalName());
             $data['bukti'] = $request->file('bukti')->getClientOriginalName();
         } else {
             $bukti = Pengaduan::where('id', $pengaduan)->get();
@@ -128,6 +133,8 @@ class PengaduanController extends Controller
 
         $cek = Pengaduan::findOrFail($pengaduan);
         $cek->update($data);
+
+        Alert::success('Berhasil', 'Pengaduan berhasil diubah');
 
         return to_route('pengaduan.index');
     }
@@ -142,14 +149,44 @@ class PengaduanController extends Controller
     {
         Pengaduan::destroy($pengaduan);
 
+        Alert::success('Berhasil', 'Pengaduan berhasil dihapus');
+
         return to_route('pengaduan.index');
     }
 
-    public function laporan()
+    public function laporan(Request $request)
     {
+        if ($request->bulan == '' && $request->tahun == '') {
+            $pengaduan = Pengaduan::all();
+        } elseif ($request->bulan != '') {
+            $pengaduan = Pengaduan::where('bulan', $request->bulan)->get();
+        } elseif ($request->tahun != '') {
+            $pengaduan = Pengaduan::where('tahun', $request->tahun)->get();
+        }
+
         return view('helpdesk.laporanHelpdesk', [
-            'pengaduans' => Pengaduan::all(),
+            'pengaduans' => $pengaduan,
             'helpdesks' => Helpdesk::all(),
         ]);
+    }
+
+    public function disposisi(Request $request, $pengaduan)
+    {
+        $cek = Pengaduan::findOrFail($pengaduan);
+
+        $tiket = Tiket::where('pengaduan_id', $pengaduan)->orderBy('created_at', 'desc')->first();
+
+        $int = (int)$request->disposisi;
+        $cek->update(['disposisi' => $int]);
+
+        $tiket->create([
+            'keterangan' => 'sedang diproses',
+            'kode' => $tiket['kode'],
+            'pengaduan_id' => $pengaduan,
+        ]);
+
+        Alert::info('Berhasil', 'Pengaduan berhasil didisposisikan');
+
+        return to_route('pengaduan.index');
     }
 }

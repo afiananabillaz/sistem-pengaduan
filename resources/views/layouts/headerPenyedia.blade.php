@@ -61,7 +61,7 @@
 
                 <li class="menu-item  ">
                     <a href="{{ route('penyedia.tracking') }}" class='menu-link'>
-                        <i class="fa fa-location-arrow"></i>
+                        <i class="fa fa-eye"></i>
                         <span>Lacak</span>
                     </a>
                 </li>

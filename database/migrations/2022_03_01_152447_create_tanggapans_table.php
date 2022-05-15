@@ -20,8 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Pengaduan::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignIdFor(Pegawai::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->date('tanggal');
-            $table->string('judul');
-            $table->text('keterangan');
+            $table->text('status');
             $table->string('dokumen');
             $table->timestamps();
         });

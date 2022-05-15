@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TanggapanRequest;
 use App\Models\Tanggapan;
-use Illuminate\Http\Request;
 
 class TanggapanController extends Controller
 {

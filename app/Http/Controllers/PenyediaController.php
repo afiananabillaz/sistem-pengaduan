@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PenyediaRequest;
 use App\Http\Requests\PengaduanRequest;
+use App\Models\Tanggapan;
 use Illuminate\Http\Request;
 
 class PenyediaController extends Controller
@@ -38,11 +39,15 @@ class PenyediaController extends Controller
         $bukti->move($tujuan, $bukti->getClientOriginalName());
 
         $data = $request->all();
-        $data['penyedia_id'] = auth()->user()->id;
+
+        $penyedia = Penyedia::where('user_id', Auth::user()->id)->first();
+
+        $data['disposisi'] = 0;
+        $data['penyedia_id'] = $penyedia['id'];
         $data['bukti'] = $request->file('bukti')->getClientOriginalName();
         Pengaduan::create($data);
 
-        $pengaduan = Pengaduan::where('penyedia_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+        $pengaduan = Pengaduan::where('penyedia_id', $penyedia['id'])->orderBy('created_at', 'desc')->first();
 
         $kode = Tiket::orderBy('created_at', 'desc')->first();
 
@@ -119,15 +124,28 @@ class PenyediaController extends Controller
 
     public function kode(Request $request)
     {
+        $kode = Tiket::where('kode', $request->kode)->get();
+
+        if ($kode->count() == 0) {
+            return view('penyedia.trackingPenyedia', [
+                'tikets' => '',
+                'penyedias' => Penyedia::where('user_id', auth()->user()->id)->get(),
+                'tanggapans' => ''
+            ]);
+        }
+
         return view('penyedia.trackingPenyedia', [
             'tikets' => Tiket::where('kode', $request->kode)->get(),
             'penyedias' => Penyedia::where('user_id', auth()->user()->id)->get(),
+            'tanggapans' => Tanggapan::where('pengaduan_id', $kode[0]['id'])->get(),
         ]);
     }
 
     public function tiket()
     {
-        $pengaduan = Pengaduan::where('penyedia_id', auth()->user()->id)->orderBy('created_at', 'desc')->first();
+        $penyedia = Penyedia::where('user_id', Auth::user()->id)->first();
+
+        $pengaduan = Pengaduan::where('penyedia_id', $penyedia['id'])->orderBy('created_at', 'desc')->first();
 
         return view('penyedia.tiketPenyedia', [
             'tikets' => Tiket::where('pengaduan_id', $pengaduan['id'])->get(),

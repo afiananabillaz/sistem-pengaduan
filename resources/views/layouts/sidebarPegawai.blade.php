@@ -19,12 +19,21 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item  ">
-                            <a href="{{ route('pegawai.show') }}" class='sidebar-link'>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
                                 <i class="bi bi-person-plus-fill"></i>
-                                <span>Pengaduan</span>
+                                <span>Pengaduan & Layanan</span>
                             </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href="{{ route('pegawai.show') }}">Pengaduan</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="{{ route('pegawai.showLayanan') }}">Layanan</a>
+                                </li>
+                            </ul>
                         </li>
+
                         <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-bar-chart-fill"></i>

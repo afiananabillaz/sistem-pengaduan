@@ -13,17 +13,9 @@
                                 @csrf
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="hidden" name="tanggal" value="{{ date('Y-m-d') }}">
-
-                                        <div class="form-group">
-                                            <label for="penyedia">Penyedia</label>
-                                            <select name="penyedia_id" id="penyedia" class="form-select">
-                                                <option value="">---Pilih Penyedia---</option>
-                                                @foreach ($penyedias as $penyedia)
-                                                <option value="{{ $penyedia->id }}">{{ $penyedia->nama }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                        <input type="hidden" name="tanggal" value="{{ date('d') }}">
+                                        <input type="hidden" name="bulan" value="{{ date('m') }}">
+                                        <input type="hidden" name="tahun" value="{{ date('Y') }}">
 
                                         <label for=" judul">Judul</label>
                                         <input type="text" class="form-control" id="judul" name="judul">

@@ -15,7 +15,7 @@
     <title>E-TICKETING BIRO PBJ PROVINSI RIAU</title>
 
     <!-- ========== Favicon Icon ========== -->
-    <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/riau.png') }}" type="image/x-icon">
 
     <!-- ========== Start Stylesheet ========== -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
@@ -63,7 +63,7 @@
                                 <div class="col-lg-6 info">
                                     <h2 class="wow fadeInDown" data-wow-duration="1s">E-TICKETING</h2>
                                     <p class="wow fadeInLeft" data-wow-duration="1.5s">
-                                        Aplikasi Layanan Pengaduan untuk melaporkan segala kendala terkait Pengadaan Barang dan Jasa Sekretariat Daerah Provinsi Riau
+                                        Aplikasi Layanan Pengaduan Untuk Melaporkan Segala Kendala Terkait Pengadaan Barang dan Jasa Sekretariat Daerah Provinsi Riau
                                     </p>
                                     <a class="btn circle btn-md btn-gradient wow fadeInUp" data-wow-duration="1.8s" href="{{ route('login') }}">MULAI <i class="bi-chevron-right fs-6"></i></a>
                                 </div>

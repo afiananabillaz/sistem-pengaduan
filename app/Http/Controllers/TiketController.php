@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TiketRequest;
 use App\Models\Tiket;
-use Illuminate\Http\Request;
 
 class TiketController extends Controller
 {

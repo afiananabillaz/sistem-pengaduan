@@ -18,17 +18,17 @@
                                         <input type="hidden" name="tahun" value="{{ date('Y') }}">
 
                                         <label for=" judul">Judul</label>
-                                        <input type="text" class="form-control" id="judul" name="judul">
+                                        <input type="text" class="form-control" id="judul" name="judul" required autofocus>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="keterangan">Keterangan</label>
-                                        <textarea type="text" class="form-control" id="keterangan" name="keterangan"></textarea>
+                                        <textarea type="text" class="form-control" id="keterangan" name="keterangan" required></textarea>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="bukti">Bukti</label>
-                                        <input type="file" id="bukti" name="bukti" class="form-control" placeholder="Name">
+                                        <input type="file" id="bukti" name="bukti" class="form-control" required>
                                     </div>
 
                                     <button type="submit" class="btn btn-primary d-flex block justify-content-end">

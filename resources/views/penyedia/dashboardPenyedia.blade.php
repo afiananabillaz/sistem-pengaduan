@@ -19,7 +19,7 @@
                                         <input type="hidden" name="tahun" value="{{ date('Y') }}">
 
                                         <label for=" judul">Judul</label>
-                                        <input type="text" class="form-control" id="judul" name="judul" required>
+                                        <input type="text" class="form-control" id="judul" name="judul" required autofocus>
                                     </div>
 
                                     <div class="form-group">

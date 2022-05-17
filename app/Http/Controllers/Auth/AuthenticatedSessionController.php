@@ -35,16 +35,13 @@ class AuthenticatedSessionController extends Controller
 
         Alert::success('Berhasil Login', 'Selamat Datang di E-TICKETING');
 
-        if(Auth::user()->role == 'penyedia') {
+        if (Auth::user()->role == 'penyedia') {
             return redirect()->intended(RouteServiceProvider::HOME);
-        }
-        elseif(Auth::user()->role == 'helpdesk') {
+        } elseif (Auth::user()->role == 'helpdesk') {
             return redirect()->intended(RouteServiceProvider::HELPDESK);
-        }else{
+        } else {
             return redirect()->intended(RouteServiceProvider::PEGAWAI);
         }
-
-        
     }
 
     /**

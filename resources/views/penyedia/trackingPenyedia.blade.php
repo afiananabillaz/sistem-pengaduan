@@ -12,7 +12,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="basicInput">Masukkan Kode Tiket</label>
-                                            <input type="text" name="kode" class="form-control" id="basicInput" required>
+                                            <input type="text" name="kode" class="form-control" id="basicInput" autofocus>
                                         </div>
 
                                         <div class="form-actions d-flex justify-content-end">

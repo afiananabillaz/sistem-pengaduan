@@ -22,7 +22,7 @@
     {{ $slot }}
 
     @include('sweetalert::alert')
-    <script src="//code.jivosite.com/widget/A0mHAMOY4b" async></script>
+    <!-- <script src="//code.jivosite.com/widget/A0mHAMOY4b" async></script> -->
 
     <!-- Hotjar Tracking Code for my site -->
     <script>

@@ -6,6 +6,7 @@ use App\Models\Penyedia;
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Tiket;
 use Illuminate\Support\Facades\Auth;
 
 class RiwayatPengaduanController extends Controller
@@ -21,7 +22,7 @@ class RiwayatPengaduanController extends Controller
 
         return view('penyedia.riwayatPengaduanPenyedia', [
             'pengaduans' => Pengaduan::where('penyedia_id', $penyedia['id'])->get(),
-            'penyedias' => Penyedia::where('user_id', Auth::user()->id)->get()
+            'penyedias' => Penyedia::where('user_id', Auth::user()->id)->get(),
         ]);
     }
 

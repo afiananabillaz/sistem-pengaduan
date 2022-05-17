@@ -10,7 +10,7 @@
                                 <table class="table table-striped" id="table1">
                                     <thead>
                                         <tr>
-                                            <th>Email</th>
+                                            <th>Kode Tiket</th>
                                             <th>Judul</th>
                                             <th>Keterangan</th>
                                             <th>File</th>
@@ -19,7 +19,11 @@
                                     <tbody>
                                         @foreach ($pengaduans as $pengaduan)
                                         <tr>
-                                            <td>{{ Auth::user()->email }}</td>
+                                            @foreach ($pengaduan->tiketPengaduan as $tp )
+
+                                            @endforeach
+
+                                            <td>{{ $tp->kode }}</td>
                                             <td>{{ $pengaduan->judul }}</td>
                                             <td>{{ $pengaduan->keterangan }}</td>
                                             <td><a style="background:#435ebe; border:1px solid transparent; color:white; border-radius:.25rem; padding:.35em .65em; cursor:pointer" href="storage/bukti/{{ $pengaduan->bukti  }}" download>Download File</a></td>

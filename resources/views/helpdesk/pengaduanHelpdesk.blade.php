@@ -56,7 +56,7 @@
                                                         </div>
                                                         <label for="keterangan">Keterangan</label>
                                                         <div class="form-group">
-                                                            <textarea type="text" class="form-control" id="keterangan" name="keterangan"></textarea required>
+                                                            <textarea type="text" class="form-control" id="keterangan" name="keterangan" required></textarea>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="bukti">Bukti</label>
@@ -191,66 +191,66 @@
                                                                         <label for="keterangan">Keterangan</label>
                                                                         <div class="form-group">
                                                                             <textarea type="text" class="form-control" id="keterangan" name="keterangan">{{ old('keterangan', $pengaduan->keterangan) }}</textarea>
-                                                        </div>
+                                                                        </div>
 
-                                                        <div class="form-group">
-                                                            <label for="bukti">Bukti</label>
-                                                            <input type="file" id="bukti" name="bukti" class="form-control" placeholder="Name">
+                                                                        <div class="form-group">
+                                                                            <label for="bukti">Bukti</label>
+                                                                            <input type="file" id="bukti" name="bukti" class="form-control" placeholder="Name">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                                            <i class="bx bx-x d-block d-sm-none"></i>
+                                                                            <span class="d-none d-sm-block">Batal</span>
+                                                                        </button>
+                                                                        <button type="submit" class="btn btn-primary ml-1">
+                                                                            Ubah Data
+                                                                        </button>
+                                                                    </div>
+
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                                            <i class="bx bx-x d-block d-sm-none"></i>
-                                                            <span class="d-none d-sm-block">Batal</span>
-                                                        </button>
-                                                        <button type="submit" class="btn btn-primary ml-1">
-                                                            Ubah Data
-                                                        </button>
+
+                                                    <div class="modal fade text-left" id="hapus{{ $pengaduan->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title" id="myModalLabel33">Hapus Pengaduan</h4>
+                                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                        <i data-feather="x"></i>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div class="modal-body">
+                                                                    <p>
+                                                                        Apakah Anda yakin ingin menghapus pengaduan ini?
+                                                                    </p>
+                                                                </div>
+
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                                                        <span class="d-none d-sm-block">Batal</span>
+                                                                    </button>
+                                                                    <form action="{{ route('pengaduan.destroy', ['id' => $pengaduan->id]) }}" method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="btn btn-danger ml-1">
+                                                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                                                            <span class="d-none d-sm-block">Hapus</span>
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
                                                     </div>
-
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="modal fade text-left" id="hapus{{ $pengaduan->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title" id="myModalLabel33">Hapus Pengaduan</h4>
-                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                        <i data-feather="x"></i>
-                                                    </button>
-                                                </div>
-
-                                                <div class="modal-body">
-                                                    <p>
-                                                        Apakah Anda yakin ingin menghapus pengaduan ini?
-                                                    </p>
-                                                </div>
-
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                                        <i class="bx bx-x d-block d-sm-none"></i>
-                                                        <span class="d-none d-sm-block">Batal</span>
-                                                    </button>
-                                                    <form action="{{ route('pengaduan.destroy', ['id' => $pengaduan->id]) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger ml-1">
-                                                            <i class="bx bx-check d-block d-sm-none"></i>
-                                                            <span class="d-none d-sm-block">Hapus</span>
-                                                        </button>
-                                                    </form>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </td>
-                                    </tr>
-                                    @endforeach
-                                    </tbody>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>

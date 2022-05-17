@@ -17,7 +17,7 @@ class IsHelpdesk
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->role == 'helpdesk'){
+        if (Auth::user()->role == 'helpdesk') {
             return $next($request);
         }
         return redirect('/');

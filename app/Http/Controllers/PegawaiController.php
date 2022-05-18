@@ -39,27 +39,6 @@ class PegawaiController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\PegawaiRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(PegawaiRequest $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Pegawai  $pegawai
@@ -93,40 +72,6 @@ class PegawaiController extends Controller
             'tiket_layanans' => TiketLayanan::all(),
             'tanggapans' => Tanggapan::all(),
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pegawai  $pegawai
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pegawai $pegawai)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\PegawaiRequest  $request
-     * @param  \App\Models\Pegawai  $pegawai
-     * @return \Illuminate\Http\Response
-     */
-    public function update(PegawaiRequest $request, Pegawai $pegawai)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Pegawai  $pegawai
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Pegawai $pegawai)
-    {
-        //
     }
 
     public function layanan()

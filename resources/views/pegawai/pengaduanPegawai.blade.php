@@ -29,7 +29,7 @@
                                             @foreach ($pengaduans as $pengaduan)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $pengaduan->tanggal }}</td>
+                                                <td>{{ $pengaduan->tanggal }}-<span>{{ $pengaduan->bulan }}-</span><span>{{ $pengaduan->tahun }}</span></td>
 
                                                 @foreach ($pengaduan->tiketPengaduan as $tp )
 

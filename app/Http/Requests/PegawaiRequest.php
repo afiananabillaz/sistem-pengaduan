@@ -24,7 +24,7 @@ class PegawaiRequest extends FormRequest
     public function rules()
     {
         return [
-            'nip' => 'required|max:18|string',
+            'nip' => 'required|max:21|string',
             'nama' => 'required|max:255|string'
         ];
     }

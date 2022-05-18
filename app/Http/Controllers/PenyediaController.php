@@ -69,51 +69,6 @@ class PenyediaController extends Controller
         return to_route('penyedia.tiket');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Penyedia  $penyedia
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Penyedia $penyedia)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Penyedia  $penyedia
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Penyedia $penyedia)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\PenyediaRequest  $request
-     * @param  \App\Models\Penyedia  $penyedia
-     * @return \Illuminate\Http\Response
-     */
-    public function update(PenyediaRequest $request, Penyedia $penyedia)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Penyedia  $penyedia
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Penyedia $penyedia)
-    {
-        //
-    }
-
     public function tracking()
     {
         return view('penyedia.trackingPenyedia', [

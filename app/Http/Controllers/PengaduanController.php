@@ -83,17 +83,6 @@ class PengaduanController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pengaduan  $pengaduan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pengaduan $pengaduan)
-    {
-        // 
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Pengaduan  $pengaduan

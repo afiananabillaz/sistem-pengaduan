@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('pegawais', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('nip');
+            $table->string('nip')->unique();
             $table->string('nama');
             $table->timestamps();
         });

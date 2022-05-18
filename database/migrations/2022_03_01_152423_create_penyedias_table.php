@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('penyedias', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('npwp');
+            $table->string('npwp')->unique();
             $table->string('nama');
             $table->string('no_hp');
             $table->timestamps();

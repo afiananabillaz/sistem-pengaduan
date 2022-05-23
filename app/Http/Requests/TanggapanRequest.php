@@ -25,7 +25,6 @@ class TanggapanRequest extends FormRequest
     {
         return [
             'status' => 'required',
-            'dokumen' => 'required'
         ];
     }
 }

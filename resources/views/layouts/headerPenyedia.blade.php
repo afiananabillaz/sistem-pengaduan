@@ -1,8 +1,8 @@
 <header class="mb-5">
     <div class="header-top">
         <div class="container">
-            <div class="logo">
-                <h4 href="index.html">E-TICKETING</h4>
+            <div>
+                <a href="index.html"><img src="{{ asset('img/bpj1.png') }}" style="width: 450px;"></a>
             </div>
             <div class="header-top-right">
 

@@ -24,9 +24,9 @@ class PenyediaRequest extends FormRequest
     public function rules()
     {
         return [
-            'npwp' => 'required|max:15|string',
+            'npwp' => 'required|max:20|string',
             'nama' => 'required|max:255|string',
-            'no_hp' => 'required|max:12|string'            
+            'no_hp' => 'required|max:12|string'
         ];
     }
 }

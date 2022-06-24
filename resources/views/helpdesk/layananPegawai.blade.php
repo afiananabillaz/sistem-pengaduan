@@ -58,7 +58,7 @@
                                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h4 class="modal-title" id="myModalLabel33">Disposisi</h4>
+                                                                    <h4 class="modal-title" id="myModalLabel33">Disposisi Layanan</h4>
                                                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                                         <i data-feather="x"></i>
                                                                     </button>
@@ -70,7 +70,7 @@
                                                                         <p>Disposisi Kepada</p>
                                                                         <fieldset class="form-group">
                                                                             <select class="form-select" id="pegawai_id" name="disposisi">
-                                                                                <option value="">---Pilih Dipsosisi---</option>
+                                                                                <option value="">---Pilih Disposisi---</option>
                                                                                 @foreach ($pegawais as $pegawai)
                                                                                 <option value="{{ $pegawai->id }}">{{ $pegawai->nama }}</option>
                                                                                 @endforeach

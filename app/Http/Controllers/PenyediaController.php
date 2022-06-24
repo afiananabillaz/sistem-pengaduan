@@ -7,7 +7,6 @@ use App\Models\Penyedia;
 use App\Models\Pengaduan;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\PenyediaRequest;
 use App\Http\Requests\PengaduanRequest;
 use App\Models\Tanggapan;
 use Illuminate\Http\Request;
@@ -89,10 +88,12 @@ class PenyediaController extends Controller
             ]);
         }
 
+        $kode = Tiket::where('kode', $request->kode)->first();
+
         return view('penyedia.trackingPenyedia', [
             'tikets' => Tiket::where('kode', $request->kode)->get(),
             'penyedias' => Penyedia::where('user_id', auth()->user()->id)->get(),
-            'tanggapans' => Tanggapan::where('pengaduan_id', $kode[0]['id'])->get(),
+            'tanggapans' => Tanggapan::where('pengaduan_id', $kode->pengaduan_id)->get(),
         ]);
     }
 

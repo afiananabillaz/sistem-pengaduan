@@ -38,15 +38,15 @@
                                                     <div class="modal-body">
                                                         <label for="email">Email </label>
                                                         <div class="form-group">
-                                                            <input type="email" class="form-control" name="email" autofocus>
+                                                            <input type="email" class="form-control" name="email" autofocus required>
                                                         </div>
                                                         <label for="nama">Nama </label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="nama">
+                                                            <input type="text" class="form-control" name="nama" required>
                                                         </div>
                                                         <label for="role">Role </label>
                                                         <div class="form-group">
-                                                            <select class="form-select" id="tambah" name="role" onchange="pilih()">
+                                                            <select class="form-select" id="tambah" name="role" onchange="pilih()" required>
                                                                 <option selected>---Pilih Role---</option>
                                                                 <option value="helpdesk">Helpdesk</option>
                                                                 <option value="pegawai">Pegawai</option>
@@ -56,13 +56,13 @@
 
                                                         <div hidden class="form-group" id="pegawai">
                                                             <label for="nip">NIP </label>
-                                                            <input type="text" name="nip" class="form-control" >
+                                                            <input type="text" name="nip" class="form-control" maxlength="21">
                                                         </div>
 
                                                         <div hidden class="form-group" id="penyedia">
                                                             <div class="control-group">
                                                                 <label>NPWP</label>
-                                                                <input type="text" name="npwp" class="form-control" >
+                                                                <input type="text" name="npwp" class="form-control" maxlength="20">
                                                             </div>
                                                             <div class="control-group">
                                                                 <label>Nomor HP</label>
@@ -72,7 +72,7 @@
 
                                                         <label for="password">Password </label>
                                                         <div class="form-group">
-                                                            <input type="password" class="form-control" name="password" >
+                                                            <input type="password" class="form-control" name="password" required>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">

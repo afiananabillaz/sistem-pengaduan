@@ -28,7 +28,7 @@ class PengaduanController extends Controller
             'tikets' => Tiket::all(),
             'penyedias' => Penyedia::all(),
             'pegawais' => Pegawai::all(),
-        ]);
+        ])->with('menu', 'pengaduan');
     }
 
     /**
@@ -156,7 +156,7 @@ class PengaduanController extends Controller
         return view('helpdesk.laporanHelpdesk', [
             'pengaduans' => $pengaduan,
             'helpdesks' => Helpdesk::all(),
-        ]);
+        ])->with('menu', 'laporan');
     }
 
     public function disposisi(Request $request, $pengaduan)

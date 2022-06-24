@@ -26,7 +26,7 @@ class LayananController extends Controller
             'pegawais' => Pegawai::all(),
             'layanans' => Layanan::all(),
             'tiket_layanans' => TiketLayanan::all(),
-        ]);
+        ])->with('menu', 'pengaduan');
     }
 
     /**
@@ -103,7 +103,7 @@ class LayananController extends Controller
         return view('helpdesk.laporanLayanan', [
             'layanans' => $layanan,
             'helpdesks' => Helpdesk::all(),
-        ]);
+        ])->with('menu', 'laporan');
     }
 
     public function disposisi(Request $request, $layanan)

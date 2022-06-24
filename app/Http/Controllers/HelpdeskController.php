@@ -33,7 +33,7 @@ class HelpdeskController extends Controller
             'sedangproses' => $sedangproses,
             'diterima' => $diterima,
             'ditolak' => $ditolak,
-        ]);
+        ])->with('menu', 'dashboard');
     }
 
 
@@ -90,7 +90,7 @@ class HelpdeskController extends Controller
 
         Alert::success('Berhasil', 'Pengguna berhasil ditambahkan');
 
-        return redirect()->route('helpdesk.pengguna');
+        return to_route('helpdesk.pengguna');
     }
 
     /**
@@ -160,6 +160,6 @@ class HelpdeskController extends Controller
             'penyedias' => Penyedia::all(),
             'pegawais' => Pegawai::all(),
             'users' => User::all()
-        ]);
+        ])->with('menu', 'pengguna');
     }
 }

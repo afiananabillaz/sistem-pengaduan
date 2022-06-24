@@ -3,7 +3,7 @@
 
         <div class="row h-100">
             <div class="col-lg-6">
-                <div id="auth-left">
+                <div id="auth-left" style="margin-top: 40px;">
 
                     <h2>Selamat Datang</h2>
                     <p>Silahkan Masuk</p>
@@ -35,7 +35,7 @@
                         <p class="text-gray-600">Belum memiliki akun? <a href="{{ route('register') }}" class="font-bold">Daftar</a></p>
                         <p>
                             @if (Route::has('password.request'))
-                            <a class="font-bold" href="{{ route('password.request') }}">Lupa password?</a>
+                            <a class="font-bold" href="{{ route('password.request') }}">Lupa Password?</a>
                             @endif
                         </p>
                     </div>
@@ -43,7 +43,7 @@
             </div>
             <div class="col-lg-6">
                 <div>
-                    <img src="{{ asset('img/illustration/5.png') }}" alt="Thumb" style="width: 80%; margin-top: 65px;">
+                    <img src="{{ asset('img/illustration/5.png') }}" alt="Thumb" style="width: 80%; margin-top: 80px;">
                 </div>
             </div>
         </div>

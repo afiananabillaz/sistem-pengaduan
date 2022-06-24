@@ -2,8 +2,8 @@
     <div id="auth">
 
         <div class="row h-100">
-            <div class="col-lg-6" style="margin-top: 100px;">
-                <div id="auth-left">
+            <div class="col-lg-6">
+                <div id="auth-left" style="margin-top: 110px;">
 
                     <p>Silahkan masukkan email Anda. Kami akan mengirimkan email untuk reset password.</p>
 
@@ -31,7 +31,7 @@
             </div>
             <div class="col-lg-6">
                 <div>
-                    <img src="{{ asset('img/illustration/5.png') }}" alt="Thumb" style="width: 80%; margin-top: 65px;">
+                    <img src="{{ asset('img/illustration/5.png') }}" alt="Thumb" style="width: 80%; margin-top: 80px;">
                 </div>
             </div>
         </div>

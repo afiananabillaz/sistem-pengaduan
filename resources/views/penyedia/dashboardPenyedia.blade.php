@@ -24,7 +24,7 @@
 
                                     <div class="form-group">
                                         <label for="keterangan">Keterangan</label>
-                                        <textarea type="text" class="form-control" id="keterangan" name="keterangan" required></textarea>
+                                        <textarea type="text" class="form-control" id="keterangan" name="keterangan"></textarea>
                                     </div>
 
                                     <div class="form-group">

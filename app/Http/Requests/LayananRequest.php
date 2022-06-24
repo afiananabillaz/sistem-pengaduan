@@ -25,7 +25,7 @@ class LayananRequest extends FormRequest
     {
         return [
             'judul' => 'required|max:255|string',
-            'keterangan' => 'required',
+            // 'keterangan' => 'required',
         ];
     }
 }

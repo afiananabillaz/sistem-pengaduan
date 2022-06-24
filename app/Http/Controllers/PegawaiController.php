@@ -14,7 +14,6 @@ use App\Models\TanggapanLayanan;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LayananRequest;
-use App\Http\Requests\PegawaiRequest;
 use App\Http\Requests\TanggapanRequest;
 
 class PegawaiController extends Controller
@@ -35,7 +34,7 @@ class PegawaiController extends Controller
             'sedangproses' => $sedangproses,
             'diterima' => $diterima,
             'ditolak' => $ditolak,
-        ]);
+        ])->with('menu', 'dashboard');
     }
 
     /**
@@ -53,7 +52,7 @@ class PegawaiController extends Controller
             'pengaduans' => Pengaduan::where('disposisi', $pegawai['id'])->get(),
             'tikets' => Tiket::all(),
             'tanggapans' => Tanggapan::all(),
-        ]);
+        ])->with('menu', 'pengaduan');
     }
 
     /**
@@ -71,7 +70,7 @@ class PegawaiController extends Controller
             'layanans' => Layanan::where('disposisi', $pegawai['id'])->get(),
             'tiket_layanans' => TiketLayanan::all(),
             'tanggapans' => Tanggapan::all(),
-        ]);
+        ])->with('menu', 'pengaduan');
     }
 
     public function layanan()
@@ -79,7 +78,7 @@ class PegawaiController extends Controller
         return view('pegawai.tambahLayananPegawai', [
             'pegawais' => Pegawai::where('user_id', auth()->user()->id)->get(),
             'penyedias' => Penyedia::all(),
-        ]);
+        ])->with('menu', 'layanan');
     }
 
     public function riwayat()
@@ -89,7 +88,7 @@ class PegawaiController extends Controller
         return view('pegawai.riwayatLayananPegawai', [
             'pegawais' => Pegawai::where('user_id', auth()->user()->id)->get(),
             'layanans' => Layanan::where('pegawai_id', $pegawai['id'])->get(),
-        ]);
+        ])->with('menu', 'layanan');
     }
 
     public function tracking()
@@ -97,7 +96,7 @@ class PegawaiController extends Controller
         return view('pegawai.trackingPegawai', [
             'tiket_layanans' => [],
             'pegawais' => Pegawai::where('user_id', auth()->user()->id)->get(),
-        ]);
+        ])->with('menu', 'lacak');
     }
 
     public function kode(Request $request)
@@ -109,14 +108,16 @@ class PegawaiController extends Controller
                 'tiket_layanans' => '',
                 'pegawais' => Pegawai::where('user_id', auth()->user()->id)->get(),
                 'tanggapan_layanans' => ''
-            ]);
+            ])->with('menu', 'lacak');
         }
+
+        $kode = TiketLayanan::where('kode', $request->kode)->first();
 
         return view('pegawai.trackingPegawai', [
             'tiket_layanans' => TiketLayanan::where('kode', $request->kode)->get(),
             'pegawais' => Pegawai::where('user_id', auth()->user()->id)->get(),
-            'tanggapan_layanans' => TanggapanLayanan::where('layanan_id', $kode[0]['id'])->get(),
-        ]);
+            'tanggapan_layanans' => TanggapanLayanan::where('layanan_id', $kode->layanan_id)->get(),
+        ])->with('menu', 'lacak');
     }
 
     /**
